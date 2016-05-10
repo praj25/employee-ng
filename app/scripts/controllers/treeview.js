@@ -8,7 +8,7 @@ $scope.baseUrl='http://localhost:1337'
    
         $http.get("http://localhost:1337/employee/treedata").success(function(result)
         {
-             $scope.treeNodes = result;
+             $rootScope.treeNodes = result;
              console.log(result);
         })
         //--------------------- To get list of qualifications--------------------------------------//
@@ -28,6 +28,18 @@ $scope.baseUrl='http://localhost:1337'
                 })
     }
     init();
+
+    $scope.$on("load_tree", function () {
+        $http.get("http://localhost:1337/employee/treedata").success(function(result)
+        {
+            $rootScope.treeNodes = result;
+            console.log(result);
+        })
+        .error(function (result) {
+            console.log(result);
+        })
+    })
+
     $scope.$on('selection-changed', function (e, node) {
                 //node - selected node in tree
         $scope.selectedNode = node;
@@ -48,7 +60,6 @@ $scope.baseUrl='http://localhost:1337'
         }
         else if($scope.selectedNode.level=="dpt")
         {
-
             $state.go("dashboard.dpt");
             $http.get("http://localhost:1337/employee/departmentdata/"+ $scope.selectedNode.id).success(function (result) {
                 $scope.department = result
@@ -56,7 +67,6 @@ $scope.baseUrl='http://localhost:1337'
             })
             .error(function (result) {
                 conole.log(result);
-                 alert("dddddddgg");
             })
         }
         else if ($scope.selectedNode.level == "root") {

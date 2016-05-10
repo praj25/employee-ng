@@ -25,7 +25,8 @@ app.controller("LoginCtrl", ['$scope', '$state', '$rootScope', '$http', '$cookie
             }
 
     });*/
-		$state.go("dashboard")
+        $state.go("employee");
+		//$state.go("dashboard")
     }
     $scope.LogOut = function()
     {
