@@ -1,0 +1,46 @@
+﻿<div class="container" ng-controller="TreeCtrl">
+    <h2>Edit Team</h2>
+    <div class="panel panel-default" >
+        <div class="panel-heading"><h4>Team Details</h4></div>
+        <div class="panel-body col-md-offset-1 ">
+            <form name="editTeam" role="form">
+
+                <div>
+                    <h5 class="normaltext">
+                        <div class="col-md-4" style="padding-top: 1.5%">
+                            <span><strong>Name</strong></span>
+                        </div>
+                    </h5>
+                    <div class="col-md-5 top-space" ng-class="{'has-error':editTeam.name.$invalid && !editTeam.name.$pristine, 'has-success':editTeam.name.$valid && !editTeam.name.$pristine}">
+                        <input class="form-control" name="name" ng-model='department[0].deptName' placeholder='Name' type="text" required>
+                    </div>
+                    <div class="col-md-3 has-error" style="padding-top: 1%">
+                        <i ng-show="editTeam.name.$invalid && !editTeam.name.$pristine" class="help-block">Please enter Team Name</i>
+                    </div>
+                </div>
+
+                <div>
+                    <h5 class="normaltext">
+                        <div class="col-md-4" style="margin-top: 1.5%">
+                            <span style="padding-top: 1.5%"><strong>Description</strong></span>
+                        </div>
+                    </h5>
+
+                    <div class="col-md-5 top-space" ng-class="{'has-error':editTeam.desc.$invalid && !editTeam.desc.$pristine, 'has-success':editTeam.desc.$valid && !editTeam.desc.$pristine}">
+                        <textarea style="margin-top:10px" class="form-control" rows="5" name="desc" id="comment" placeholder="Description" ng-model='department[0].description' required></textarea>
+                    </div>
+
+                    <div class="col-md-3 has-error" style="padding-top: 1%">
+                        <i ng-show="editTeam.desc.$invalid && !editTeam.desc.$pristine" class="help-block">Please enter Team Description</i>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-3 col-sm-offset-5 panel-body" ng-controller="teamCtrl">
+                    <button class="btn btn-success btn-block" style="font-size:0.8em" ng-disabled="editTeam.$invalid" ng-click="editTeamData(department[0])">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+  

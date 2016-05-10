@@ -1,0 +1,49 @@
+﻿
+<div id="company" class="tab-pane fade">
+    <div class="panel panel-default" style="width:100%">
+        <div class="panel-heading navbar-inverse">
+            <h4>
+                Company Profile
+            </h4>
+        </div>
+        <div class="panel-body col-md-offset-1">
+
+
+            <div>
+                <ul class="list-group col-md-9">
+                    <h5 class="normaltext"><li class="list-group-item text-right col-md-5 col-md-offset-1"><span class="pull-left"><strong class="">DOJ</strong></span> <span style="font-weight:normal">   {{emp.doj}}	   </span> </li></h5>
+                    <h5 class="normaltext"><li class="list-group-item text-right col-md-5 col-md-offset-1"><span class="pull-left"><strong class="">PF No</strong></span> <span style="font-weight:normal">  {{emp.pf_no}}  </span></li></h5>
+
+                </ul>
+            </div>
+            <div class="table-responsive col-md-11" style="clear:both; max-height:39vh">
+                <table class="table table-hover" style="color:black;">
+                    <thead>
+                        <tr class="active">
+                            <th><h5 style="color:black">Year</h5></th>
+                            <th><h5 style="color:black">Salary</h5></th>
+                            <th><h5 style="color:black">Bonus</h5></th>
+                            <th><h5 style="color:black">Leaves</h5></th>
+                            <th><h5 style="color:black">Post</h5></th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in salary">
+
+                            <td><h5 class="normalfont normaltext">{{data.year}}</h5></td>
+                            <td><h5 class="normalfont normaltext">{{data.salary}}</h5></td>
+                            <td><h5 class="normalfont normaltext">{{data.bonus}}</h5></td>
+                            <td><h5 class="normalfont normaltext">{{data.leaves}}</h5></td>
+                            <td><h5 class="normalfont normaltext">{{data.post}}</h5></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <br>
+
+        </div>
+    </div>
+</div>

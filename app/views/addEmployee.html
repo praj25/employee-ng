@@ -1,0 +1,476 @@
+<style type="text/css">
+#personalPanel:after
+		{
+			font-family:'Glyphicons Halflings';
+		    content:"\e114";
+			float: right;
+			color: grey;
+		}
+		#personalPanel.collapsed:after
+		{
+			content:"\e080";
+		}
+		
+		
+		#qualificationPanel:after,#companyPanel:after
+		{
+			font-family:'Glyphicons Halflings';
+			content:"\e114";
+			float: right;
+			color: grey;
+		}
+		#qualificationPanel.collapsed:after,#companyPanel.collapsed:after
+		{
+			content:"\e080";
+		}
+		.navTab
+		{
+			height:30%;
+		}
+		
+		.normalfont{
+		font-weight:normal;
+		}
+		
+		.normaltext{
+		text-transform:none;
+		}
+		
+		
+		.top-space{
+			margin-top: 1.5%;
+		}
+
+		
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.min.css" />
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="../styles/table_responsive.css">
+
+
+<!--
+<div>
+<span id="text1">{{item.text}}</span>
+</div> -->
+<div class="container" style="width:100%">
+
+
+
+	
+	<h2 style="padding:2%">New Employee</h2>
+	  <ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" data-target="#personal"><h5>Personal</h5></a></li>
+		<li ><a data-toggle="tab" data-target="#company"><h5>Company</h5></a></li>
+		<li><a data-toggle="tab" data-target="#qualifications"><h5>Qualifications & Certifications</h5></a></li>
+	  </ul>
+	<form role="form" name="EditEmployee">
+	<div class="tab-content panel-body" style="padding-left: 0px;padding-right: 0px">
+		<div id="personal" class="tab-pane fade in active" >
+			<div class="panel panel-default">
+			
+							<div class="panel-heading navbar-inverse panel-body " >
+								<h4  class="col-md-offset-2">
+								<div class="col-md-4">
+									<input class="form-control" ng-model='user.fname' placeholder="First Name" type="text">
+								</div>
+								
+								<div class="col-md-4">
+									<input class="form-control" ng-model='user.lname' placeholder="Last Name" type="text">
+								</div>
+								</h4>
+							</div>
+			
+				<div class="col-md-offset-2 panel-body">
+				 
+						<div>
+						<h5 class="normaltext">
+							<div class="col-md-4" style="padding-top: 1.5%">
+								<span><strong>Mobile Number</strong></span>	
+							</div>
+						</h5>
+
+						<div class="col-md-5 top-space" ng-class="{'has-error':EditEmployee.mobile_no.$invalid && !EditEmployee. mobile_no.$pristine,'has-success':EditEmployee.mobile_no.$valid && !EditEmployee.mobile_no.$pristine}">
+							<input class="form-control" name="mobile_no" ng-model='user.mobile_no' placeholder="Mobile Number" type="number" required minlength="10" maxlength="10">
+						</div>	
+						<div class="col-md-3 has-error" style="padding-top: 2%">
+							<i ng-show="EditEmployee.mobile_no.$invalid && !EditEmployee.mobile_no.$pristine" class="help-block">Please Enter Mobile Number</i>	
+						</div>
+						
+					</div>
+
+					<div >
+						<h5 class="normaltext">
+							<div class="col-md-4" style="padding-top:2%">
+								<span><strong>Email</strong></span>	
+							</div>
+						</h5>
+
+						<div class="col-md-5 top-space" ng-class="{'has-error':EditEmployee.email_id.$invalid && !EditEmployee. email_id.$pristine, 'has-success':EditEmployee.email_id.$valid && !EditEmployee.email_id.$pristine}" >
+							<input class="form-control" name="email_id" ng-model='user.email_id' placeholder="Email" type="email" required>   
+						</div>
+						<div class="col-md-3 has-error" style="padding-top: 2%">
+							<i ng-show="EditEmployee.email_id.$invalid && !EditEmployee.email_id.$pristine" class="help-block">Please Enter a valid Email-Id</i>	
+						</div>
+					</div>
+
+
+						<div>
+							<h5 class="normaltext">
+								<div class="col-md-4" style="padding-top: 1.5%">
+									<span><strong>Gender</strong></span>	
+								</div>
+							</h5>
+								<div class="col-md-5 top-space">
+									<div class="form-group">
+									  <select class="form-control" ng-model='user.gender'>
+									  <option style="display:none" value="">select Gender</option>
+									    <option value="male">Male</option>
+									    <option value="female">female</option>
+									  </select>
+									</div>
+								</div>	
+						</div>
+
+					<div>
+						<h5 class="normaltext">
+							<div class="col-md-4" style="padding-top: 2%">
+								<span><strong>DOB</strong></span>	
+							</div>
+						</h5>
+
+							<div class="col-md-5 top-space" ng-class="{'has-error':EditEmployee.dob.$invalid && EditEmployee.dob.$touched, 'has-success':EditEmployee.dob.$valid && EditEmployee.dob.$touched}">
+								<input class="form-control" name="dob" ng-model='user.dob' placeholder='Birth Date' type="date" required>
+							</div>
+							<div class="col-md-3 top-space has-error">
+							<i  class="help-block" ng-show="EditEmployee.dob.$invalid && EditEmployee.dob.$touched" >
+								Please Enter Datae of Birth
+							</i>
+							</div>	
+					</div>
+
+					<div>
+						<h5 class="normaltext">
+							<div class="col-md-4" style="padding-top: 1.5%">
+								<span><strong>Address</strong></span>	
+							</div>
+						</h5>
+							<div class="col-md-5 top-space">
+								<textarea class="form-control" rows="5" id="comment" placeholder="Address" ng-model='user.address' required></textarea>
+							</div>	
+					</div>
+
+
+					<div>
+						<h5 class="normaltext">
+							<div class="col-md-4" style="padding-top: 1.5%">
+								<span><strong>City</strong></span>	
+							</div>
+						</h5>
+							<div class="col-md-5 top-space">
+								<input class="form-control" ng-model='user.city' placeholder='City' type="text" required>
+							</div>	
+					</div>
+
+
+					<div>
+						<h5 class="normaltext">
+							<div class="col-md-4" style="padding-top: 1.5%">
+								<span><strong>State</strong></span>	
+							</div>
+						</h5>
+							<div class="col-md-5 top-space">
+								<input class="form-control" ng-model='user.state' placeholder='State' type="text" required>
+							</div>	
+					</div>
+
+					<div >
+						<h5 class="normaltext">
+							<div class="col-md-4" style="padding-top: 1.5%">
+								<span><strong>Country</strong></span>	
+							</div>
+						</h5>
+							<div class="col-md-5 top-space">
+								<input class="form-control" ng-model='user.country' placeholder='State' type="text" required>
+							</div>	
+					</div>
+
+			
+										
+				</div>
+			</div>
+		</div>
+  
+		<div id="company" class="tab-pane fade">
+		 <div class="panel panel-default" style="width:100%">
+								<div class="panel-heading navbar-inverse">
+									<h4>
+										Company Profile
+									</h4>
+								</div>
+			<div class="panel-body ">
+				
+												
+					<div class="col-md-6" >
+						<h5 class="normaltext">
+							<div class="col-md-4" style="padding: 2.5%">
+								<span><strong>DOJ</strong></span>	
+							</div>
+						</h5>
+							<div class="col-md-5">
+								<input class="form-control" ng-model='user.doj' id="datepicker" placeholder='DOJ' type="text" required>
+							</div>	
+					</div>
+
+					<div class="col-md-6">
+						<h5 class="normaltext">
+							<div class="col-md-4" style="padding: 2.5%">
+								<span><strong>PF_No</strong></span>	
+							</div>
+						</h5>
+							<div class="col-md-5">
+								<input class="form-control" ng-model='user.pf_no' placeholder='PF_no' type="text" required>
+							</div>	
+					</div>
+
+								
+			  <div style="clear:both;margin-top: 3%;">
+			 
+					 <div id="no-more-tables">
+                         <table class="col-md-12 table-striped table-condensed cf" style="padding: 0%">
+                            <thead class="cf">
+                                <tr>
+                                    <th class="numeric">Year</th>
+                                    <th class="numeric">Salary</th>
+                                    <th class="numeric">Bonus</th>
+                                    <th class="numeric">Leaves</th>
+                                    <th class="numeric">Role</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in salary">
+                                    <td data-title="Year">
+                                    {{salary[$index].year}}
+                                    </td>
+                                    <td data-title="Salary">
+                                         <input class="form-control" ng-model='salary[$index].salary' placeholder='PF_no' type="text" required>
+                                    </td>
+                                    <td data-title="Bonus" class="numeric">
+                                        <input class="form-control" ng-model='salary[$index].bonus' placeholder='PF_no' type="text" required>
+                                    </td>
+                                    <td data-title="Leaves" class="numeric">
+                                        <input class="form-control" ng-model='salary[$index].leaves' placeholder='PF_no' type="text" required>
+                                    </td>
+                                    <td data-title="Role" class="numeric">
+                                        <select id="salaryRole" ng-change="changeRole($index,salary[$index].role.role)" class="form-control" ng-model="salary[$index].role" ng-options="role.role for role in roleList track by role.code">
+                                        <option style="display:none" value="">{{salary[$index].role}}</option>
+                                        </select>
+                                    </td>
+                                     <td data-title="" class="numeric">
+                                        <button class="form-control btn-danger" type="button" id="mybtn" style="margin:1%" ng-click="getDeleteId_Salary()"> <span class="glyphicon glyphicon-trash"></span></button>
+                                    </td>
+                                    
+                                </tr>
+                                   <tr >
+                                    <td data-title="Year">
+                                    <input class="form-control" id="salaryYear" class="monthYearPicker" ng-model='newSalary.year' placeholder='Year' type="number" min=0 >
+                                    </td>
+                                    <td data-title="Salary">
+                                         <input class="form-control" id="salarySalary" ng-model='newSalary.salary' placeholder='Salary' type="number" min=0 >
+                                    </td>
+                                    <td data-title="Bonus" class="numeric">
+                                        <input class="form-control" id="salaryBonus" ng-model='newSalary.bonus' placeholder='Bonus' type="number" min=0  >
+                                    </td>
+                                    <td data-title="Leaves" class="numeric">
+                                        <input class="form-control" id="salaryLeaves" ng-model='newSalary.leaves' placeholder='Leaves' type="number" min=0 >
+                                    </td>
+                                    <td data-title="Role" class="numeric">
+                                    
+                                    <div class="form-group" style="margin-top: 12px">
+                                    <select id="newSalaryRole" class="form-control" ng-model="newSalary.selected_role" ng-options="role.role for role in roleList track by role.code">
+                                    <option style="display:none" value="">Select Role</option>
+                                    </select>
+                                      
+                               
+
+
+                                </div>
+                                    </td>
+                                     <td data-title="" class="numeric">
+                                        <button class="form-control btn-success" type="button" id="mybtn" style="margin:1%" ng-click="addSalary(newSalary)"> <span class="glyphicon glyphicon-plus"></span></button>
+                                    </td>
+                                    
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                        </div>
+
+				</div>
+
+				<br>
+
+			</div>
+			</div>
+		</div>
+		
+    <div id="qualifications" class="tab-pane fade">
+			 <div class="col-md-5 ">
+				 <div class="panel panel-default" style="width:100%">
+							
+								<div class="panel-heading navbar-inverse">
+									<h4>
+										Qualifications
+									</h4>
+								</div>
+
+						  <div id="no-more-tables">
+                         <table class="col-md-12 table-striped table-condensed cf" style="padding: 1%">
+                            <thead class="cf">
+                                <tr>
+                                    <th class="numeric">Degree</th>
+                                    <th class="numeric">Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in qualifications">
+                                    <td data-title="Name">
+                                   {{data.name}}
+                                    </td>
+                                   
+                                    <td data-title="%" class="numeric">
+                                        {{data.percentage}}%
+                                    </td>
+                                    <td data-title="" class="numeric" ng-init="buttonClicked='deleteQualification';">
+                                        <button class="form-control btn-danger" type="button" data-toggle="modal" data-target="#DeleteCertificationModal" ng-click="getDeleteId_Qualification(buttonClicked)"> <span class="glyphicon glyphicon-trash"></span></button>
+                                    </td>
+
+                                    
+                                </tr>
+                                <tr>
+                                    <td data-title="Degree" class="numeric">
+                                        <div class="form-group" style="margin-top: 12px">
+                                    <select id="select_qualificaion" class="form-control" ng-model="user.qualification_selected" ng-options="qualification.name for qualification in qualification_list track by qualification.code">
+                                        <option style="display:none" value="">select a Qualification</option>
+                                    </select>
+
+                                </div>
+                                    </td>
+                                    <td data-title="%" class="numeric">
+                                        <input class="form-control" style="margin:1%" id="percentage" ng-model="user.percentage" placeholder='Percentage' type="number">
+
+                                    </td>
+                                    <td data-title="" class="numeric">
+                                        <button class="form-control btn-success" type="button" id="mybtn" style="margin:1%;margin-bottom:5%" ng-click="addQualification(user)"> <span class="glyphicon glyphicon-plus"></span></button>
+
+                                    </td>
+
+
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                        </div>
+				</div>
+			 
+			 </div>
+			 <div class="col-md-7 ">
+				
+				<div class="panel panel-default" style="width:100%">
+							
+							<div class="panel-heading navbar-inverse">
+								<h4>
+									Certifications 
+								</h4>
+							</div>
+
+						
+
+						<div class="panel-body" >
+								<div id="no-more-tables">
+                         <table class="col-md-12 table-striped table-condensed cf" style="padding: 1%">
+                            <thead class="cf">
+                                <tr>
+                                    <th class="numeric">Year</th>
+                                    <th class="numeric">Certification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="data in certifications">
+                                    <td data-title="Year">
+                                   {{data.year}}
+                                    </td>
+                                   
+                                    <td data-title="Name" class="numeric">
+                                        {{data.certification_name}}%
+                                    </td>
+                                    <td data-title="" class="numeric" ng-init="buttonClicked='deleteCertification';">
+                                        <button class="form-control btn-danger" type="button" data-toggle="modal" data-target="#DeleteCertificationModal" ng-click="getDeleteId_Certification(buttonClicked)"> <span class="glyphicon glyphicon-trash"></span></button>
+                                    </td>
+
+                                    
+                                </tr>
+                                <tr>
+                                    <td data-title="Name" class="numeric" >
+                                         <div class="form-group" style="margin-top: 12px">
+                                    <select id="select_certification" class="form-control" ng-model="user.certification_selected" ng-options="certification.certification_name for certification in certification_list track by certification.certification_code">
+                                        <option style="display:none" value="">select a Certification</option>
+                                    </select>
+                                </div>
+                                    </td>
+                                    <td data-title="Year" class="numeric" >
+                                         <input class="form-control" style="margin:1%" id="year" ng-model="user.year" placeholder='Year' type="text">
+                                    </td>
+                                    <td data-title="" class="numeric" >
+                                         <button class="form-control btn-success" type="button" id="mybtn" style="margin:1%;margin-bottom:5%" ng-click="addCertification(user)"> <span class="glyphicon glyphicon-plus"></span></button>
+                                    </td>
+
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                        </div>
+						
+						</div>
+					
+			 
+				</div>
+			
+			</div>
+		
+
+ 				 <!-- Modal -->
+				  <div class="modal fade" id="DeleteCertificationModal" role="dialog">
+				    <div class="modal-dialog modal-lg">
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				          <h4 class="modal-title">Warning</h4>
+				        </div>
+				        <div class="modal-body">
+				          <p>Are you sure you want to delete?</p>
+				        </div>
+				        <div class="modal-footer">
+
+							       	
+
+							       	
+							       	<button ng-show=" buttonClicked =='deleteCertification'" type="button" class="btn btn-danger" ng-click="deleteCertification();" data-dismiss="modal">Delete Certification</button> 
+
+							       	<button ng-show=" buttonClicked =='deleteQualification'" type="button" class="btn btn-danger" ng-click="deleteQualification();" data-dismiss="modal">Delete Qualification</button>
+							        
+							        <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+							        
+						        
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+    
+	</div>
+			<div class="col-sm-3 col-sm-offset-4 panel-body">
+				 <button class="btn-lg btn-success btn-block" style="font-size:0.8em" ng-disabled="EditEmployee.$invalid" ng-click="myfunc()" >Add</button>
+			</div>
+		</form>
+</div>

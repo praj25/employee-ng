@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h2>New Team</h2>
+    <div class="panel panel-default" ng-controller="teamCtrl">
+        <div class="panel-heading"><h4>Team Details</h4></div>
+        <div class="panel-body col-md-offset-1 ">
+            <form name="addTeam" role="form">
+                <div>
+                    <h5 class="normaltext">
+                        <div class="col-md-4" style="padding-top: 1.5%">
+                            <span><strong>Name</strong></span>
+                        </div>
+                    </h5>
+                    <div class="col-md-5 top-space" ng-class="{'has-error':addTeam.name.$invalid && !addTeam.name.$pristine, 'has-success':addTeam.name.$valid && !addTeam.name.$pristine}">
+                        <input class="form-control" name="name" ng-model='team.name' placeholder='Name' type="text" required>
+                    </div>
+                    <div class="col-md-3 has-error" style="padding-top: 1%">
+                        <i ng-show="addTeam.name.$invalid && !addTeam.name.$pristine" class="help-block">Please enter Team Name</i>
+                    </div>
+
+                </div>
+                <div>
+                    <h5 class="normaltext">
+                        <div class="col-md-4" style="margin-top: 1.5%">
+                            <span style="padding-top: 1.5%"><strong>Description</strong></span>
+                        </div>
+                    </h5>
+                    <div class="col-md-5 top-space" ng-class="{'has-error':addTeam.desc.$invalid && !addTeam.desc.$pristine, 'has-success':addTeam.desc.$valid && !addTeam.desc.$pristine}">
+                        <textarea style="margin-top:10px" class="form-control" rows="5" name="desc" id="comment" placeholder="Description" ng-model='team.desc' required></textarea>
+
+
+                    </div>
+                    <div class="col-md-3 has-error" style="padding-top: 1%">
+                        <i ng-show="addTeam.desc.$invalid && !addTeam.desc.$pristine" class="help-block">Please enter Team Description</i>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-3 col-sm-offset-5 panel-body">
+                    <button class="btn btn-success btn-block" style="font-size:0.8em" ng-disabled="addTeam.$invalid" ng-click="saveTeamData(team)">Add Team</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
