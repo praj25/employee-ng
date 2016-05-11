@@ -17,8 +17,19 @@ app.controller("empCtrl", ['$scope', '$rootScope', '$http', '$state', '$cookies'
 */
 
 //-----------------------Initialization-----------------------------------//
-  //  var emp_id = $cookies.get("UserId");
-  var emp_id=118
+if($cookies.get("UserId")==undefined)
+{
+
+    var emp_id = $rootScope.user_id
+        console.log("Emp: "+emp_id)
+}
+else
+{
+    var emp_id = $cookies.get("UserId");
+
+}
+    
+
     $scope.isMatch = true;
     $scope.isValid = true;
     $scope.isFilled = true;
