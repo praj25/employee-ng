@@ -77,7 +77,8 @@ angular
 
             .state('dashboard.emp', {
                 url: '/emp',
-                templateUrl: 'views/EmployeeDisplay_admin.html', controller: 'TreeCtrl'
+                templateUrl: 'views/EmployeeDisplay_admin.html', 
+                controller: 'TreeCtrl'
             })
 
             .state('dashboard.edit', {

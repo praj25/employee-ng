@@ -36,6 +36,7 @@
                                             }
                                             if (parent != undefined) {
                                                 node.parentId = parent.nodeId;
+                                                node.parentCode = parent.id;
                                             }
                                             if (scope.nodelist.indexOf(node) == -1) {
                                                 scope.nodelist.push(node);

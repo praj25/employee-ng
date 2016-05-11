@@ -11,6 +11,20 @@ $scope.baseUrl='http://localhost:1337'
              $rootScope.treeNodes = result;
              console.log(result);
         })
+
+        //----------------To Get All Teams--------------------------------------------------//
+        $http.get($scope.baseUrl + "/employee/company").success(function (result) {
+           $scope.TeamDetails = [];
+           for (i = 0; i < result.length; i++)
+           {
+               $scope.TeamDetails.push({
+                   'name' : result[i].team_name,
+                   'employee_count' : result[i].emp_count
+               })
+           }
+           console.log($scope.TeamDetails)
+       })
+
         //--------------------- To get list of qualifications--------------------------------------//
         $http.get('http://localhost:1337/employee/getQualification/').success(function (result) {     
                     $scope.qualification_list=result;
@@ -83,7 +97,7 @@ $scope.baseUrl='http://localhost:1337'
         //console.log(node.expanded);
     });
 
-    $scope.editDisplay = function() {
+    $scope.editEmployeeView = function() {
 
         $state.go("dashboard.edit")
     }

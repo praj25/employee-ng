@@ -36,214 +36,173 @@
   
 </style>
 <link rel="stylesheet" href="../styles/table_responsive.css">
- 
-<!--
+
+
 <div>
-<span id="text1">{{item.text}}</span>
-</div> -->
+    <h2> {{emp.fname | capitalize }} {{emp.lname | capitalize}} </h2>
+</div>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" data-target="#personal"><h5>Personal</h5></a></li>
+    <li><a data-toggle="tab" data-target="#company"><h5>Company</h5></a></li>
+    <li><a data-toggle="tab" data-target="#qualifications"><h5>Qualifications & Certifications</h5></a></li>
+</ul>
 
-    <h2>{{emp.fname }} {{emp.lname}}</h2><br>
+<div class="tab-content panel-body" id="content">
+    <div id="personal" class="tab-pane fade in active">
+        <div class="panel panel-default">
 
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" data-target="#personal"><h5>Personal</h5></a></li>
-        <li><a data-toggle="tab" data-target="#company"><h5>Company</h5></a></li>
-        <li><a data-toggle="tab" data-target="#qualifications"><h5>Qualifications & Certifications</h5></a></li>
-    </ul>
+            <div class="panel-heading navbar-inverse personal-heading">
+                <h4> Personal Profile </h4>
+            </div>
 
-    <div class="tab-content panel-body">
-        <div id="personal" class="tab-pane fade in active">
-            <div class="panel panel-default">
-                <div class="panel-heading navbar-inverse">
-                    <h4>
-                       <!-- {{emp.fname }} {{emp.lname}}-->
-                       Personal Profile
-                    </h4>
-                </div>
-
-            
-                    
-                    
-                        <div class="panel-body">
-                            <dl class="dl-horizontal col-md-5 panel-body">
-                              <dt><h5>Mobile Number</h5></dt>
-                              <dd><h5 class="normalfont">{{emp.mobile_no}}</h5></dd>
-                              <dt><h5>Email</h5></dt>
-                              <dd><h5 class="normalfont"> {{emp.email_id}} </h5></dd>
-                              <dt><h5>Gender</h5></dt>
-                              <dd><h5 class="normalfont">{{emp.gender}}</h5></dd>
-                              <dt><h5>DOB</h5></dt>
-                              <dd><h5 class="normalfont">{{emp.dob}} </h5></dd>
-                              <dt><h5>Address</h5></dt>
-                              <dd><h5 class="normalfont">{{emp.address}}</h5></dd>
-                              <dt><h5>City</h5></dt>
-                              <dd><h5 class="normalfont">{{emp.city}}</h5></dd>
-                              <dt><h5>State</h5></dt>
-                              <dd><h5 class="normalfont">{{emp.state }}</h5> </dd>
-                              <dt><h5>Country</h5></dt>
-                              <dd><h5 class="normalfont">{{emp.country}} </h5></dd>
-                            </dl>
-                    </div>
-                           
-
-                       <!-- <ul class="list-group col-md-9">
-                        <h5 class="normaltext"><li class="list-group-item text-right"><span class="pull-left"><strong class="">Mobile Number</strong></span> <span class="normalfont">   {{emp.mobile_no}}	   </span> </li></h5>
-                        <h5 class="normaltext"><li class="list-group-item text-right"><span class="pull-left"><strong class="">Email</strong></span>    <span class="normalfont">        {{emp.email_id}}        </span></li></h5>
-                        <h5 class="normaltext"><li class="list-group-item text-right"><span class="pull-left"><strong class="">Gender</strong></span>   <span class="normalfont">        {{emp.gender}}               </span></li></h5>
-                        <h5 class="normaltext"><li class="list-group-item text-right"><span class="pull-left"><strong class="">DOB</strong></span>      <span class="normalfont">        {{emp.dob}}             </span></li></h5>
-                        <h5 class="normaltext"><li class="list-group-item text-right"><span class="pull-left"><strong class="">Address</strong></span>  <span class="normalfont">        {{emp.address}}          </span></li></h5>
-                        <h5 class="normaltext"><li class="list-group-item text-right"><span class="pull-left"><strong class="">City</strong></span>     <span class="normalfont">        {{emp.city}}             </span></li></h5>
-                        <h5 class="normaltext"><li class="list-group-item text-right"><span class="pull-left"><strong class="">State</strong></span>    <span class="normalfont">        {{emp.state }}            </span></li></h5>
-                        <h5 class="normaltext"><li class="list-group-item text-right"><span class="pull-left"><strong class="">Country</strong></span>  <span class="normalfont">        {{emp.country}}          </span></li></h5>
-
-
-                    </ul> -->
-
-                </div>
-
-           
-        </div>
-
-        <div id="company" class="tab-pane fade">
-                
-                    <div class="panel panel-default">
-                        <div class="panel-heading navbar-inverse">
-                            <h4>
-                               <!-- {{emp.fname }} {{emp.lname}}-->
-                               Company Profile
-                            </h4>
-                        </div>
-                       <div class="panel-body">
-                         <dl class="dl-horizontal col-md-6 panel-body">
-                      
-                              <dt><h5>Joining Date</h5></dt>
-                              <dd><h5 class="normalfont">{{emp.doj}}</h5></dd>
-                              <dt><h5>PF number</h5></dt>
-                              <dd><h5 class="normalfont"> {{emp.pf_no}} </h5></dd>
-                            
-                            </dl>
-                   
-
-                     <div id="no-more-tables">
-                         <table class="col-md-12 table-striped table-condensed cf">
-                            <thead class="cf">
-                                <tr>
-                                    <th class="numeric">Year</th>
-                                    <th class="numeric">Salary</th>
-                                    <th class="numeric">Bonus</th>
-                                    <th class="numeric">Leaves</th>
-                                    <th class="numeric">Role</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="data in salary">
-                                    <td data-title="Year">{{data.year}}</td>
-                                    <td data-title="Salary">{{data.salary}}</td>
-                                    <td data-title="Bonus" class="numeric">{{data.bonus}}</td>
-                                    <td data-title="Leaves" class="numeric">{{data.leaves}}</td>
-                                    <td data-title="Role" class="numeric">{{data.role}}</td>
-                                </tr>
-                               
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
-                    </div>
-                       <!-- <table class="table table-hover" style="color:black;">
-                            <thead>
-                                <tr class="active">
-                                    <th><h5 style="color:black">Year</h5></th>
-                                    <th><h5 style="color:black">Salary</h5></th>
-                                    <th><h5 style="color:black">Bonus</h5></th>
-                                    <th><h5 style="color:black">Leaves</h5></th>
-                                    <th><h5 style="color:black">Post</h5></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="data in salary">
-                                    <td><h5 class="normalfont normaltext">{{data.year}}</h5></td>
-                                    <td><h5 class="normalfont normaltext">{{data.salary}}</h5></td>
-                                    <td><h5 class="normalfont normaltext">{{data.bonus}}</h5></td>
-                                    <td><h5 class="normalfont normaltext">{{data.leaves}}</h5></td>
-                                    <td><h5 class="normalfont normaltext">{{data.role}}</h5></td>
-                                </tr>
-
-                            </tbody>
-                        </table> -->
-
-
-                 
-                    <br>
+            <div class="panel-body personal-body">
+                <dl class="dl-horizontal col-md-5 panel-body">
+                    <dt><h5 style="font-size:1.2em"><strong>Mobile Number</strong></h5></dt>
+                    <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.mobile_no}}</h5></dd>
+                    <dt><h5 style="font-size:1.2em"><strong>Email</strong></h5></dt>
+                    <dd><h5 class="normalfont" style="font-size:1.2em"> {{emp.email_id}} </h5></dd>
+                    <dt><h5 style="font-size:1.2em"><strong>Gender</strong></h5></dt>
+                    <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.gender | capitalize}}</h5></dd>
+                    <dt><h5 style="font-size:1.2em"><strong>Date Of Birth</strong></h5></dt>
+                    <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.dob | date}}</h5></dd>
+                    <dt><h5 style="font-size:1.2em"><strong>Address</strong></h5></dt>
+                    <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.address}}</h5></dd>
+                    <dt><h5 style="font-size:1.2em"><strong>City</strong></h5></dt>
+                    <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.city | capitalize}}</h5></dd>
+                    <dt><h5 style="font-size:1.2em"><strong>State</strong></h5></dt>
+                    <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.state | capitalize }}</h5> </dd>
+                    <dt><h5 style="font-size:1.2em"><strong>Country</strong></h5></dt>
+                    <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.country | capitalize}} </h5></dd>
+                    </h5></dd>
+                </dl>
+            </div>
 
         </div>
+    </div>
 
-        <div id="qualifications" class="tab-pane fade">
+    <div id="company" class="tab-pane fade">
 
         <div class="panel panel-default">
             <div class="panel-heading navbar-inverse">
-                <h4>
-                  Acadamic Profile
-                </h4>
+                <h4> Company Profile </h4>
             </div>
-            <div >
-           <div class="panel-body" >
-            <div class="panel-heading ">
-                <h4>
-                   Qualifications
-                </h4>
+            <div class="panel-body">
+              
+                  <div class="col-md-5">
+                    <dl class="dl-horizontal  panel-body">
+                        <dt><h5 style="font-size:1.2em"><strong>Joining Date</strong></h5></dt>
+                        <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.doj | date}}</h5></dd>
+                        <dt><h5 style="font-size:1.2em"><strong>PF number</strong></h5></dt>
+                        <dd><h5 class="normalfont" style="font-size:1.2em"> {{emp.pf_no}} </h5></dd>
+
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <dl class="dl-horizontal panel-body">
+                        <dt><h5 style="font-size:1.2em"><strong>Teams</strong></h5></dt>
+                        <dd ng-repeat="team in emp.teams"><h5 class="normalfont">{{team.team_name}}</h5></dd>
+                    </dl>
+                </div>
+
+                <div id="no-more-tables">
+
+                    <table class="col-md-12 table-striped table-condensed cf">
+                        <thead class="cf">
+                            <tr>
+                                <th class="numeric" style="font-size:1.2em"><strong>Year</strong></th>
+                                <th class="numeric" style="font-size:1.2em"><strong>Salary</strong></th>
+                                <th class="numeric" style="font-size:1.2em"><strong>Bonus</strong></th>
+                                <th class="numeric" style="font-size:1.2em"><strong>Leaves</strong></th>
+                                <th class="numeric" style="font-size:1.2em"><strong>Role</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in salary">
+                                <td data-title="Year" style="font-size:1.2em">{{data.year}}</td>
+                                <td data-title="Salary" style="font-size:1.2em">{{data.salary}}</td>
+                                <td data-title="Bonus" class="numeric" style="font-size:1.2em">{{data.bonus}}</td>
+                                <td data-title="Leaves" class="numeric" style="font-size:1.2em">{{data.leaves}}</td>
+                                <td data-title="Role" class="numeric" style="font-size:1.2em">{{data.role}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
-            <div class="" style="width: 100%">
-                     <div id="no-more-tables">
-                         <table class="col-md-12 table-striped table-condensed cf" style="padding:0px">
-                            <thead class="cf">
-                                <tr>
-                                    <th class="numeric col-md-8">Degree</th>
-                                    <th class="numeric">Percentage</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="data in qualifications">
-                                    <td data-title="Degree">{{data.name}}</td>
-                                    <td data-title="percentage">{{data.percentage}}%</td>
-                                </tr>
-                               
-                            </tbody>
-                        </table>
-                        </div>
-              </div>
-              </div>
-<br>
-        <div class="panel-body">
-            <div class="panel-heading" style="margin-top:5px">
-                <h4>
-                   Certifications
-                </h4>
-            </div>
-               <div class="" style="width: 100%">
-                     <div id="no-more-tables">
-                         <table class="col-md-12 table-striped table-condensed cf" style="padding:0px">
-                            <thead class="cf">
-                                <tr>
-                                   <th class="numeric col-md-8">Title</th>
-                                    <th class="numeric">Year</th>
-                                 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="data in certifications">
-                                 <td data-title="Name">{{data.certification_name}}</td>
-                                    <td data-title="Year">{{data.year}}</td>
-                                   
-                                </tr>
-                               
-                            </tbody>
-                        </table>
-                        </div>
-              </div>
-              </div>
-        </div>
+        </div> <br>
 
     </div>
+
+    <div id="qualifications" class="tab-pane fade">
+
+        <div class="panel panel-default">
+            <div class="panel-heading navbar-inverse">
+                <h4>Acadamic Profile</h4>
+            </div>
+
+            <div>
+                <div class="panel-body">
+                    <div class="panel-heading" style="padding-left:0px">
+                        <h4>
+                            Qualifications
+                        </h4>
+                    </div>
+
+                    <div class="" style="width: 100%">
+                        <div id="no-more-tables">
+
+                            <table class="col-md-12 table-striped table-condensed cf" style="padding:0px">
+                                <thead class="cf">
+                                    <tr>
+                                        <th class="numeric col-md-8" style="font-size:1.2em"><strong>Degree</strong></th>
+                                        <th class="numeric" style="font-size:1.2em"><strong>Percentage</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="data in qualifications">
+                                        <td data-title="Degree" style="font-size:1.2em">{{data.degree}}</td>
+                                        <td data-title="Percentage" style="font-size:1.2em">{{data.percentage}}%</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div> <br>
+                <div class="panel-body">
+                    <div class="panel-heading" style="padding-left:0px">
+                        <h4>Certifications</h4>
+                    </div>
+                    <div class="" style="width: 100%">
+                        <div id="no-more-tables">
+
+                            <table class="col-md-12 table-striped table-condensed cf" style="padding:0px">
+                                <thead class="cf">
+                                    <tr>
+                                        <th class="numeric col-md-8" style="font-size:1.2em"><strong>Title</strong></th>
+                                        <th class="numeric" style="font-size:1.2em"><strong>Year</strong></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="data in certifications">
+                                        <td data-title="Title" style="font-size:1.2em">{{data.certification}}</td>
+                                        <td data-title="Year" style="font-size:1.2em">{{data.year}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
+
     <div class="col-sm-3 col-sm-offset-4 panel-body">
-        <button class="btn btn-info btn-block" ng-click="editDisplay()" style="font-size:0.8em">Edit</button>
-    </div>
+        <button class="btn btn-info btn-block" ng-click="editEmployeeView()" style="font-size:0.8em">Edit</button>
+    </div>   <!-- Edit Button-->
+</div>

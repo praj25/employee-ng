@@ -1,11 +1,30 @@
 ﻿
 <div>
-    <h2>Company Details</h2><br>
-    <div class="panel panel-default">
-       This is Company Page 
+    <h2>Organization Details</h2><br>
+    <div class="panel panel-default" ng-controller="TreeCtrl">
+      <div style="" class="panel-heading"><h4>Teams</h4></div>
+        <div class="panel-body">          
+            <div id="no-more-tables" style="max-height: 50vh; overflow: auto;">
+                <table class="col-md-12 table-striped table-condensed cf" style="padding: 1%; ">
+                    <thead class="cf">
+                        <tr>
+                            <th class="numeric">Team</th>
+                            <th class="numeric">Employee Count</th>                           
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="data in TeamDetails">
+                        <tr>
+                            <td data-title="Team">
+                                {{data.name}}
+                            </td>
+                            <td data-title="Employee Count" class="numeric">
+                                {{data.employee_count}}
+                            </td>                          
+                        </tr>
+                    </tbody>
+                </table>     <!--Teams Display-->
+            </div>
+        </div>
     </div>
-
-    <div style="max-height:45vh">
-        
-    </div>
+ 
 </div>
