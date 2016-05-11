@@ -34,36 +34,92 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
 			}
 		}
 //-------------------------Add Salary-----------------------------/////////
-		$scope.addSalary = function(newSalary){
-				var duplicateFlag=false;
- 				console.log(newSalary)
- 				if(document.getElementById("newSalaryRole").selectedIndex >0 && document.getElementById("salaryYear").value && document.getElementById("salarySalary").value && document.getElementById("salaryLeaves").value && document.getElementById("salaryBonus").value && document.getElementById("newSalaryRole").value){
- 					console.log("newSalary");
- 						for(i=0;i<$scope.salary.length;i++)
- 							if($scope.salary[i].year==newSalary.year)
- 								duplicateFlag=true;
-					console.log(duplicateFlag)
- 						if(!duplicateFlag)
- 						{
- 							$scope.salary.push({'year': newSalary.year, 'salary':newSalary.salary,'leaves':newSalary.leaves,'bonus':newSalary.bonus,'role':newSalary.selected_role.role,'add':true})		
-							document.getElementById("newSalaryRole").selectedIndex;
-							document.getElementById("salaryYear").value="";
-							document.getElementById("salarySalary").value="";
-							document.getElementById("salaryLeaves").value="";
-							document.getElementById("salaryBonus").value="";
-							document.getElementById("newSalaryRole").value=""
- 						}	
+		 function validateDate(salaryYear, joiningYear) {
+        if (salaryYear >= joiningYear)
+            return true;
+        else
+            return false;
+    }
 
-			}
-			//---------------Sorting according to the year-------------------------//			
-			$scope.salary.sort(function (a, b) {
-				if (a.year < b.year)
-					return 1;
-				if (a.year > b.year)
-					return -1;
-				return 0;
-			});
-			}	
+    $scope.addSalary = function (newSalary) {
+
+        var duplicateFlag = false;
+        if (document.getElementById("newSalaryRole").selectedIndex > 0 && document.getElementById("salaryYear").value && document.getElementById("salarySalary").value && document.getElementById("salaryLeaves").value && document.getElementById("salaryBonus").value && document.getElementById("newSalaryRole").value) {
+          
+
+            for (i = 0; i < $scope.salary.length; i++)
+                if ($scope.salary[i].year == newSalary.year)
+                    duplicateFlag = true;
+
+            if ($scope.emp == undefined || $scope.emp.doj == undefined) {
+                $scope.ErrorMessage = "Please Provide Date Of Joining.";
+                $("#invalidYear").modal();
+                return;
+            }
+            var date = $scope.emp.doj.toString();
+            var year = date.split(" ")[3]; //-----Get joining year-------
+    
+            var isValid = validateDate($scope.newSalary.year, year)
+            if(isValid){
+            if (!duplicateFlag) {
+                $scope.salary.push({ 'year': newSalary.year, 'salary': newSalary.salary, 'leaves': newSalary.leaves, 'bonus': newSalary.bonus, 'role': newSalary.selected_role.role, 'code': newSalary.selected_role.code})
+                document.getElementById("newSalaryRole").selectedIndex;
+                document.getElementById("salaryYear").value = "";
+                document.getElementById("salarySalary").value = "";
+                document.getElementById("salaryLeaves").value = "";
+                document.getElementById("salaryBonus").value = "";
+                document.getElementById("newSalaryRole").value = ""
+            }
+            }
+            else {
+                $scope.errorMsg = "Salary Year is less than Date of Joining.";
+                $("#invalidYear").modal();
+            }
+        }
+        //---------------Sorting according to the year-------------------------//			
+        $scope.salary.sort(function (a, b) {
+            if (a.year < b.year)
+                return 1;
+            if (a.year > b.year)
+                return -1;
+            return 0;
+        });
+    }
+
+
+ $scope.updateSalaryYear = function (index) {
+        var date = $scope.emp.doj.toString();
+        var year = date.split(" ")[3]; //-----Get joining year-------
+
+        var isValid = validateDate($scope.salary[index].year, year)
+
+        if (isValid) {
+            var duplicateFlag = false;
+            for (i = 0; i < $scope.salary.length; i++) {
+                if ($scope.salary[index].year == $scope.salary[i].year && index != i) 
+                    duplicateFlag = true;
+                
+            }
+            if (!duplicateFlag) {
+                console.log("--not--")
+                $scope.salary[index].updated = true;
+            }
+            else
+            {
+                $scope.errorMsg = "Entry for the year " + $scope.salary[index].year + " already exists"
+                $("#invalidYear").modal();               
+            }               
+        }
+
+        else {
+            $scope.errorMsg = "Year is less then Joining Year"
+            $("#invalidYear").modal();
+        }
+    }
+
+    $scope.updateSalary = function (index) {
+                $scope.salary[index].updated = true;
+    }
 //----------------------------------------------------------------------------//
 		$scope.changeRole = function(index,role) {
 			console.log("index: "+index +" "+ "role: "+ role)

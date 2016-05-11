@@ -13,37 +13,57 @@ myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope',funct
 			$scope.qualifications=[];
 			$scope.certifications=[];
 
-			$scope.addSalary = function(newSalary){
-				
-				var duplicateFlag=false;
- 				//console.log(newSalary)
- 				if(document.getElementById("newSalaryRole").selectedIndex >0 && document.getElementById("salaryYear").value && document.getElementById("salarySalary").value && document.getElementById("salaryLeaves").value && document.getElementById("salaryBonus").value && document.getElementById("newSalaryRole").value){
- 					console.log("newSalary");
- 						for(i=0;i<$scope.salary.length;i++)
- 							if($scope.salary[i].year==newSalary.year)
- 								duplicateFlag=true;
-					console.log(duplicateFlag)
- 						if(!duplicateFlag)
- 						{
- 							$scope.salary.push({'year': newSalary.year, 'salary':newSalary.salary,'leaves':newSalary.leaves,'bonus':newSalary.bonus,'role':newSalary.selected_role.role,'add':true})		
-							document.getElementById("newSalaryRole").selectedIndex;
-							document.getElementById("salaryYear").value="";
-							document.getElementById("salarySalary").value="";
-							document.getElementById("salaryLeaves").value="";
-							document.getElementById("salaryBonus").value="";
-							document.getElementById("newSalaryRole").value=""
- 						}	
+			  function validateDate(salaryYear, joiningYear) {
+        if (salaryYear >= joiningYear)
+            return true;
+        else
+            return false;
+    }
 
-			}
-			//---------------Sorting according to the year-------------------------//			
-			$scope.salary.sort(function (a, b) {
-				if (a.year < b.year)
-					return 1;
-				if (a.year > b.year)
-					return -1;
-				return 0;
-			});
-			}
+    $scope.addSalary = function (newSalary) {
+
+        var duplicateFlag = false;
+        if (document.getElementById("newSalaryRole").selectedIndex > 0 && document.getElementById("salaryYear").value && document.getElementById("salarySalary").value && document.getElementById("salaryLeaves").value && document.getElementById("salaryBonus").value && document.getElementById("newSalaryRole").value) {
+          
+
+            for (i = 0; i < $scope.salary.length; i++)
+                if ($scope.salary[i].year == newSalary.year)
+                    duplicateFlag = true;
+
+            if ($scope.user == undefined || $scope.user.doj == undefined) {
+                $scope.ErrorMessage = "Please Provide Date Of Joining.";
+                $("#invalidYear").modal();
+                return;
+            }
+            var date = $scope.user.doj.toString();
+            var year = date.split(" ")[3]; //-----Get joining year-------
+    
+            var isValid = validateDate($scope.newSalary.year, year)
+            if(isValid){
+            if (!duplicateFlag) {
+                $scope.salary.push({ 'year': newSalary.year, 'salary': newSalary.salary, 'leaves': newSalary.leaves, 'bonus': newSalary.bonus, 'role': newSalary.selected_role.role, 'code': newSalary.selected_role.code})
+                document.getElementById("newSalaryRole").selectedIndex;
+                document.getElementById("salaryYear").value = "";
+                document.getElementById("salarySalary").value = "";
+                document.getElementById("salaryLeaves").value = "";
+                document.getElementById("salaryBonus").value = "";
+                document.getElementById("newSalaryRole").value = ""
+            }
+            }
+            else {
+                $scope.ErrorMessage = "Salary Year is less than Date of Joining.";
+                $("#invalidYear").modal();
+            }
+        }
+        //---------------Sorting according to the year-------------------------//			
+        $scope.salary.sort(function (a, b) {
+            if (a.year < b.year)
+                return 1;
+            if (a.year > b.year)
+                return -1;
+            return 0;
+        });
+    }
 
 
 			$scope.addQualification = function(user){
