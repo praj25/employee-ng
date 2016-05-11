@@ -1,27 +1,4 @@
 ﻿<style type="text/css">
-    #personalPanel:after {
-        font-family: 'Glyphicons Halflings';
-        content: "\e114";
-        float: right;
-        color: grey;
-    }
-
-    #personalPanel.collapsed:after {
-        content: "\e080";
-    }
-
-
-    #qualificationPanel:after, #companyPanel:after {
-        font-family: 'Glyphicons Halflings';
-        content: "\e114";
-        float: right;
-        color: grey;
-    }
-
-    #qualificationPanel.collapsed:after, #companyPanel.collapsed:after {
-        content: "\e080";
-    }
-
     .navTab {
         height: 30%;
     }
@@ -33,13 +10,12 @@
     .normaltext {
         text-transform: none;
     }
-  
 </style>
 <link rel="stylesheet" href="../styles/table_responsive.css">
 
 
 <div>
-    <h2> {{emp.fname | capitalize }} {{emp.lname | capitalize}} </h2>
+    <h2> {{emp.fname }} {{emp.lname}} </h2>
 </div>
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" data-target="#personal"><h5>Personal</h5></a></li>
@@ -47,16 +23,17 @@
     <li><a data-toggle="tab" data-target="#qualifications"><h5>Qualifications & Certifications</h5></a></li>
 </ul>
 
-<div class="tab-content panel-body" id="content">
+<div class="tab-content panel-body">
     <div id="personal" class="tab-pane fade in active">
         <div class="panel panel-default">
 
-            <div class="panel-heading navbar-inverse personal-heading">
+            <div class="panel-heading navbar-inverse">
                 <h4> Personal Profile </h4>
             </div>
 
-            <div class="panel-body personal-body">
+            <div class="panel-body">
                 <dl class="dl-horizontal col-md-5 panel-body">
+
                     <dt><h5 style="font-size:1.2em"><strong>Mobile Number</strong></h5></dt>
                     <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.mobile_no}}</h5></dd>
                     <dt><h5 style="font-size:1.2em"><strong>Email</strong></h5></dt>

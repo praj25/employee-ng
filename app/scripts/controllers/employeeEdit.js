@@ -1,6 +1,7 @@
 var myApp = angular.module("employeeApp");
 myApp.controller('editCtrl', ['$scope','$http','$location','$state',function ($scope,$http,$location,$state) {
 
+
 $scope.deletedCertifications = [];
 $scope.deletedQualifications = [];
 $scope.deletedSalary = [];
@@ -29,7 +30,7 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
  								duplicateFlag=true;
 
  						if(!duplicateFlag)
- 						$scope.certifications.push({'certification_name': user.certification_selected.certification_name, 'year':user.year,'certification_code':user.certification_selected.certification_code,'add':true})		
+ 						$scope.certifications.push({'certification': user.certification_selected.certification_name, 'year':user.year,'certification_code':user.certification_selected.certification_code,'add':true})		
 			}
 		}
 //-------------------------Add Salary-----------------------------/////////
@@ -193,6 +194,10 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
 				}
 
 
+        
+
+
+
 				//--------------- To Update Personal Data----------------------------------//
 				var data = ({
 					fname:emp.fname,
@@ -212,9 +217,10 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
 
 
 				})
-				$http.post("http://localhost:1337/employe/updatePersonalInfo",data)
+			//	$http.post("http://localhost:1337/employe/updatePersonalInfo",data)
 
 				$state.go("dashboard.emp");
+
 			}
 
 }]);

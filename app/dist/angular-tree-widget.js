@@ -31,9 +31,15 @@
                                             }
 
                                             //expanded all the nodes
-                                            if (node.expanded === undefined && node.children != undefined) {
-        /*To expand or collapse the nodes*/    node.expanded = false;
+                                          /*  if (node.expanded === undefined && node.children != undefined) {
+                                       node.expanded = true;
+                                            }*/
+
+                                            if (node.expanded === undefined && node.children != undefined ) {
+                                           node.expanded = true;
+                                            
                                             }
+
                                             if (parent != undefined) {
                                                 node.parentId = parent.nodeId;
                                                 node.parentCode = parent.id;

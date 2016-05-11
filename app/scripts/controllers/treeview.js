@@ -8,6 +8,7 @@ $scope.baseUrl='http://localhost:1337'
    
         $http.get("http://localhost:1337/employee/treedata").success(function(result)
         {
+
              $rootScope.treeNodes = result;
              console.log(result);
         })
@@ -37,11 +38,25 @@ $scope.baseUrl='http://localhost:1337'
         //---------------------To get list of codes------------------------------------------------//
          $http.get($scope.baseUrl+'/employee/getGenderCodeList/').success(function (result) {         
                     $scope.gender_list=result;
-                    console.log("----Gender--------");
-                    console.log($scope.gender_list);
+              
                 })
     }
     init();
+
+
+      
+       function FormatDate(date) {
+       date = date.toString();
+       var year = (date.split('-')[0]);
+       var month = (date.split('-')[1]);
+       var day1 = (date.split('-')[2]);
+       var day = (day1.split(" ")[0]);
+     
+       var formattedDate =day + "-" + month+ "-"+year;
+         console.log(formattedDate);
+       return formattedDate;
+       
+   };
 
     $scope.$on("load_tree", function () {
         $http.get("http://localhost:1337/employee/treedata").success(function(result)
@@ -54,6 +69,7 @@ $scope.baseUrl='http://localhost:1337'
         })
     })
 
+
     $scope.$on('selection-changed', function (e, node) {
                 //node - selected node in tree
         $scope.selectedNode = node;
@@ -64,10 +80,12 @@ $scope.baseUrl='http://localhost:1337'
             $scope.employee = result[0]
             $scope.employeeId = $scope.selectedNode.id;
             $scope.emp = $scope.employee.personal[0];
+            $scope.emp.dob = new Date(FormatDate($scope.emp.dob));  
+            $scope.emp.doj = new Date(FormatDate($scope.emp.doj));  
             $scope.qualifications=$scope.employee.qualification;
-            console.log($scope.qualifications);
+       
             $scope.salary=$scope.employee.company;
-            console.log($scope.salary);
+        
 
             $scope.certifications=$scope.employee.certification;
             })
@@ -80,7 +98,7 @@ $scope.baseUrl='http://localhost:1337'
                 console.log($scope.department);
             })
             .error(function (result) {
-                conole.log(result);
+
             })
         }
         else if ($scope.selectedNode.level == "root") {
@@ -108,5 +126,6 @@ $scope.baseUrl='http://localhost:1337'
          $state.go('dashboard.addEmployee');
     }
 
+ 
 
 }]);

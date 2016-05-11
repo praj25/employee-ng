@@ -38,23 +38,27 @@
     .top-space {
         margin-top: 1.5%;
     }
-.ui-datepicker-calendar {
-       display: none;
+
+    .ui-datepicker-calendar {
+        display: none;
     }
+
     .ui-datepicker-month {
-       display: none;
+        display: none;
     }
-    .ui-datepicker-prev{
-       display: none;
+
+    .ui-datepicker-prev {
+        display: none;
     }
-    .ui-datepicker-next{
-       display: none;
+
+    .ui-datepicker-next {
+        display: none;
     }
-}
+
+    
 </style>
 
-
-
+<script src="../dist/otherscripts.js"></script>
 <link rel="stylesheet" href="../styles/table_responsive.css">
 <div class="container" id="controllerId" style="width:100%; padding:0px" ng-controller="editCtrl">
     <ul class="nav nav-tabs">
@@ -293,7 +297,7 @@
 
                                                 <!--<input class="form-control datepicker" ng-change="changeYear()" id="salaryYear" ng-model='newSalary.year' placeholder='Year' type="text" min=0>-->
                                                       
-                                                                <select class="yearPicker form-control" ng-change="changeYear()" ng-model='newSalary.year' id="salaryYear">
+                                                                <select class="yearPicker form-control" ng-model='newSalary.year' id="salaryYear">
                                                                     <option style="display:none" value="">Select Year</option>
                                                                 </select>
                                               
@@ -511,5 +515,15 @@
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
 
 </div>
