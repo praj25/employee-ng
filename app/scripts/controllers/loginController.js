@@ -2,7 +2,8 @@ var app = angular.module('employeeApp');
 app.controller("LoginCtrl", ['$scope', '$state', '$rootScope', '$http', '$cookies', function ($scope, $state, $rootScope, $http, $cookies) {
     $scope.authenticated = true;
     $scope.Login = function (data) {
-      /*  $http.post("http://localhost:58213/api/login", data).success(function (result) {
+        console.log(data)
+        $http.post("http://localhost:1337/login", data).success(function (result) {
             console.log(result);
             if (result.length == 0)
 
@@ -24,8 +25,8 @@ app.controller("LoginCtrl", ['$scope', '$state', '$rootScope', '$http', '$cookie
                     $state.go("employee")
             }
 
-    });*/
-		$state.go("dashboard")
+    });
+      
     }
     $scope.LogOut = function()
     {

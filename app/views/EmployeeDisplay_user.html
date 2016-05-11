@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../dist/angular-tree-widget.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/table_responsive.css">
+    
+</head>
+<body ng-app="myApp">
+   <style type="text/css">
+     
+        .navTab {
+            height: 30%;
+        }
+
+        .normalfont {
+            font-weight: normal;
+        }
+
+        .normaltext {
+            text-transform: none;
+        }
+    </style>
+
+
+   <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" ui-sref="dashboard">Welcome <!--{{emp.fname}}--></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-lock"></span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href=""  data-target="#pwdModal" data-toggle="modal">Change Password</a></li>
+                            <li class="divider"></li>
+                          
+                            <li class="nav-header"><a  data-toggle="modal" data-target="#myModal">LogOut</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a ui-sref="about">About</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" ng-controller="empCtrl">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4>Details</h4></div>
+            <div class="panel-body">
+
+                <div> 
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" data-target="#personal"><h5>Personal</h5></a></li>
+                        <li><a data-toggle="tab" data-target="#company"><h5>Company</h5></a></li>
+                        <li><a data-toggle="tab" data-target="#qualifications"><h5>Qualifications & Certifications</h5></a></li>
+                    </ul>
+                </div>
+                <div>
+
+
+                    <h2>{{emp.fname | capitalize}} {{emp.lname | capitalize}} </h2>
+                     <div class="tab-content panel-body">
+                        <div id="personal" class="tab-pane fade in active">
+                            <div class="panel panel-default">
+                                <div class="panel-heading navbar-inverse">
+                                    <h4>Personal Profile</h4>                                  
+                                </div>
+
+                                <div class="panel-body">
+                                    <dl class="dl-horizontal col-md-5 panel-body">
+                                        <dt><h5 style="font-size:1.2em"><strong>Mobile Number</strong></h5></dt>
+                                        <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.mobile_no}}</h5></dd>
+                                        <dt><h5 style="font-size:1.2em"><strong>Email</strong></h5></dt>
+                                        <dd><h5 class="normalfont" style="font-size:1.2em"> {{emp.email_id}} </h5></dd>
+                                        <dt><h5 style="font-size:1.2em" style="font-size:1.2em"><strong>Gender</strong></h5></dt>
+                                        <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.gender | capitalize}}</h5></dd>
+                                        <dt><h5 style="font-size:1.2em" style="font-size:1.2em" ><strong>Date Of Birth</strong></h5></dt>
+                                        <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.dob}}</h5></dd>
+                                        <dt><h5 style="font-size:1.2em" style="font-size:1.2em"><strong>Address</strong></h5></dt>
+                                        <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.address}}</h5></dd>
+                                        <dt><h5 style="font-size:1.2em" style="font-size:1.2em"><strong>City</strong></h5></dt>
+                                        <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.city | capitalize}}</h5></dd>
+                                        <dt><h5 style="font-size:1.2em" style="font-size:1.2em"><strong>State</strong></h5></dt>
+                                        <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.state | capitalize }}</h5> </dd>
+                                        <dt><h5 style="font-size:1.2em" style="font-size:1.2em"><strong>Country</strong></h5></dt>
+                                        <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.country | capitalize}} </h5></dd>
+                                    </h5></dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="company" class="tab-pane fade">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading navbar-inverse">
+                                    <h4> Company Profile</h4>
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="col-md-6">
+                                        <dl class="dl-horizontal">
+
+                                            <dt><h5 style="font-size:1.2em"><strong>Joining Date</strong></h5></dt>
+                                            <dd><h5 class="normalfont" style="font-size:1.2em">{{emp.doj}}</h5></dd>
+                                            <dt><h5 style="font-size:1.2em"><strong>PF Number</strong></h5></dt>
+                                            <dd><h5 class="normalfont" style="font-size:1.2em"> {{emp.pf_no}} </h5></dd>
+                                        </dl>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <dl class="dl-horizontal">
+                                            <dt><h5 style="font-size:1.2em"><strong>Teams</strong></h5></dt>
+                                            <dd ng-repeat="team in emp.teams" style="font-size:1.2em"><h5 class="normalfont">{{team.team_name | capitalize}}</h5></dd>
+                                        </dl>
+                                    </div>
+
+                                    <div id="no-more-tables">
+                                        <table class="col-md-12 table-striped table-condensed cf">
+                                            <thead class="cf">
+                                                <tr>
+                                                    <th class="numeric" style="font-size:1.2em"><strong>Year</strong></th>
+                                                    <th class="numeric" style="font-size:1.2em"><strong>Salary</strong></th>
+                                                    <th class="numeric" style="font-size:1.2em"><strong>Bonus</strong></th>
+                                                    <th class="numeric" style="font-size:1.2em"><strong>Leaves</strong></th>
+                                                    <th class="numeric" style="font-size:1.2em"><strong>Role</strong></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="data in salary">
+                                                    <td data-title="Year" style="font-size:1.2em" >{{data.year}}</td>
+                                                    <td data-title="Salary" style="font-size:1.2em">{{data.salary}}</td>
+                                                    <td data-title="Bonus" class="numeric" style="font-size:1.2em">{{data.bonus}}</td>
+                                                    <td data-title="Leaves" class="numeric" style="font-size:1.2em">{{data.leaves}}</td>
+                                                    <td data-title="Role" class="numeric" style="font-size:1.2em">{{data.role}}</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+
+                        </div>
+
+                        <div id="qualifications" class="tab-pane fade">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading navbar-inverse">
+                                    <h4>Acadamic Profile</h4>
+                                </div>
+                                <div>
+                                    <div class="panel-body">
+                                        <div class="panel-heading" style="padding-left:0px">
+                                            <h4> Qualifications </h4>
+                                        </div>
+                                        <div class="" style="width: 100%">
+                                            <div id="no-more-tables">
+                                                <table class="col-md-12 table-striped table-condensed cf" style="padding:0px">
+                                                    <thead class="cf">
+                                                        <tr>
+                                                            <th class="numeric col-md-8" style="font-size:1.2em"><strong>Degree</strong></th>
+                                                            <th class="numeric" style="font-size:1.2em"><strong>Percentage</strong></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="data in qualifications">
+                                                            <td data-title="Degree" style="font-size:1.2em">{{data.degree}}</td>
+                                                            <td data-title="Percentage" style="font-size:1.2em">{{data.percentage}}%</td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="panel-body">
+                                        <div class="panel-heading" style="padding-left:0px">
+                                            <h4> Certifications</h4>
+                                        </div>
+                                        <div class="" style="width: 100%">
+                                            <div id="no-more-tables">
+                                                <table class="col-md-12 table-striped table-condensed cf" style="padding:0px">
+                                                    <thead class="cf">
+                                                        <tr>
+                                                            <th class="numeric col-md-8" style="font-size:1.2em"><strong>Title</strong></th>
+                                                            <th class="numeric" style="font-size:1.2em"><strong>Year</strong></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="data in certifications">
+                                                            <td data-title="Title" style="font-size:1.2em">{{data.certification}}</td>
+                                                            <td data-title="Year" style="font-size:1.2em">{{data.year}}</td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+
+<!--Modal To Change Password-->
+    <div id="pwdModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> 
+                </div>  
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <div class="panel">
+                                <div class="text-center">
+                                        <!--<div class="panel-body">-->
+                                            <form name="changePassword" role="form">
+                                                <div class="form-group">
+                                                    <input class="form-control input-lg" style="width:80%;margin:auto;" placeholder="Current Password" ng-model="oldPass" type="password" required>   
+                                                 
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <input  style="width:80%;margin:auto;" class="form-control input-lg" placeholder="New Password" ng-model="newPass" type="password" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input style="width:80%;margin:auto;" class="form-control input-lg" placeholder="Confirm Password" ng-model="newPass1" type="password" required>
+                                                </div>
+                                                <div class="form-group has-error">
+                                                    <p ng-show="!isFilled" class="help-block">Please Fill The Fields Marked Red.</p>
+                                                    <p ng-show="!isMatch" class="help-block">Passwords Do Not Match</p>
+                                                    <p ng-show="!isValid" class="help-block">Incorrect Current Password</p>
+                                                </div>
+                                                <div class="form-group has-success">
+                                                    <i ng-show="successMsg" class="help-block">Password Successfully Changed</i>
+                                                </div>
+
+
+                                                <input class="btn btn-lg btn-primary" ng-disable="changePassword.$invalid" value="Save" ng-click="savePassword(emp)">
+                                            </form>
+                                        <!--</div>-->
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!--Modal To logout-->
+    <div id="myModal" class="modal fade " role="dialog" ng-controller="LoginCtrl">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <!--<h4 class="modal-title">Warning</h4>-->
+                </div>
+                <div class="modal-body">
+                    <h5><p class="alert-warning">Are you sure you want to logout?</p></h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ui-sref="logout" class="btn btn-danger" ng-click="LogOut()" data-dismiss="modal">Logout</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <script>
+                                $(window).on('popstate', function () {
+                                    $(".modal-backdrop").remove();
+                                });
+                    </script>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</body>
+</html>

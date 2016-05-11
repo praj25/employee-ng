@@ -8,9 +8,24 @@ $scope.baseUrl='http://localhost:1337'
    
         $http.get("http://localhost:1337/employee/treedata").success(function(result)
         {
-             $scope.treeNodes = result;
 
+             $rootScope.treeNodes = result;
+             console.log(result);
         })
+
+        //----------------To Get All Teams--------------------------------------------------//
+        $http.get($scope.baseUrl + "/employee/company").success(function (result) {
+           $scope.TeamDetails = [];
+           for (i = 0; i < result.length; i++)
+           {
+               $scope.TeamDetails.push({
+                   'name' : result[i].team_name,
+                   'employee_count' : result[i].emp_count
+               })
+           }
+           console.log($scope.TeamDetails)
+       })
+
         //--------------------- To get list of qualifications--------------------------------------//
         $http.get('http://localhost:1337/employee/getQualification/').success(function (result) {     
                     $scope.qualification_list=result;
@@ -28,6 +43,7 @@ $scope.baseUrl='http://localhost:1337'
     }
     init();
 
+
       
        function FormatDate(date) {
        date = date.toString();
@@ -41,6 +57,18 @@ $scope.baseUrl='http://localhost:1337'
        return formattedDate;
        
    };
+
+    $scope.$on("load_tree", function () {
+        $http.get("http://localhost:1337/employee/treedata").success(function(result)
+        {
+            $rootScope.treeNodes = result;
+            console.log(result);
+        })
+        .error(function (result) {
+            console.log(result);
+        })
+    })
+
 
     $scope.$on('selection-changed', function (e, node) {
                 //node - selected node in tree
@@ -64,15 +92,13 @@ $scope.baseUrl='http://localhost:1337'
         }
         else if($scope.selectedNode.level=="dpt")
         {
-
             $state.go("dashboard.dpt");
             $http.get("http://localhost:1337/employee/departmentdata/"+ $scope.selectedNode.id).success(function (result) {
                 $scope.department = result
                 console.log($scope.department);
             })
             .error(function (result) {
-           
-             
+
             })
         }
         else if ($scope.selectedNode.level == "root") {
@@ -89,7 +115,7 @@ $scope.baseUrl='http://localhost:1337'
         //console.log(node.expanded);
     });
 
-    $scope.editDisplay = function() {
+    $scope.editEmployeeView = function() {
 
         $state.go("dashboard.edit")
     }

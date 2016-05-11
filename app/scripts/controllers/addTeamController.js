@@ -7,7 +7,7 @@ app.controller("teamCtrl", ['$scope', '$http', '$state', '$rootScope', function 
             team_name : teamData.name,
             team_desc : teamData.desc
         }
-        $http.post("http://localhost:58213/api/team", data).success(function () {
+        $http.post("http://localhost:1337/employee/addteam", data).success(function () {
             $scope.$emit("load_tree", {});
             $state.go("dashboard");
         })
