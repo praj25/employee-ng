@@ -1,5 +1,5 @@
 var myApp = angular.module("employeeApp");
-myApp.controller('EmployeeEdit', ['$scope','$http','$location',function ($scope,$http,$location) {
+myApp.controller('EmployeeEdit', ['$scope','$http','$location','$state',function ($scope,$http,$location,$state) {
 
 $scope.deletedCertifications = [];
 $scope.deletedQualifications = [];
@@ -193,6 +193,10 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
 				}
 
 
+        
+
+
+
 				//--------------- To Update Personal Data----------------------------------//
 				var data = ({
 					fname:emp.fname,
@@ -214,7 +218,7 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
 				})
 				$http.post("http://localhost:1337/employe/updatePersonalInfo",data)
 
-				$location.path("/emp");
+				$state.go('dashboard');
 			}
 
 }]);

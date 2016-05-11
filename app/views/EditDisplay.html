@@ -56,6 +56,8 @@
 
 
 <link rel="stylesheet" href="../styles/table_responsive.css">
+<script src="../dist/otherScripts.js"></script>
+
 <div class="container" id="controllerId" style="width:100%; padding:0px" ng-controller="EmployeeEdit">
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" data-target="#personal"><h5>Personal</h5></a></li>
@@ -132,7 +134,7 @@
                             </h5>
 
                             <div class="col-md-5 top-space">
-                                <input class="form-control" ng-model='emp.dob' placeholder='Birth Date' type="text" required>
+                                <input class="form-control" ng-model='emp.dob' placeholder='Birth Date' type="date" required>
                             </div>
                         </div>
 
@@ -205,7 +207,7 @@
                                 </div>
                             </p>
                             <div class="col-md-5">
-                                <input class="form-control" ng-model='emp.doj' placeholder='DOJ' type="text" required>
+                                <input class="form-control" ng-model='emp.doj' placeholder='DOJ' type="date" required>
                             </div>
                         </div>
 
@@ -222,6 +224,8 @@
 
 
                         <div style="clear:both;margin-top: 3%;">
+
+                         
                        
                         <div id="no-more-tables">
                          <table class="col-md-12 table-striped table-condensed cf" style="padding: 0%">
@@ -237,7 +241,11 @@
                             <tbody>
                                 <tr ng-repeat="data in salary">
                                     <td data-title="Year">
-                                    <input class="form-control" ng-model='salary[$index].year' placeholder='PF_no' type="text"required>
+                                  
+
+                                     <select class="form-control yearPicker" ng-model='salary[$index].year' ng-change="updateSalaryYear($index)" >
+                                       <option ng-selected="'salary[$index].year'">{{salary[$index].year}}</option>
+                                    </select>
                                     </td>
                                     <td data-title="Salary">
                                          <input class="form-control" ng-model='salary[$index].salary' placeholder='PF_no' type="text" required>
@@ -261,7 +269,10 @@
                                    <tr >
                                     <td data-title="Year">
 
-                                    <input class="form-control datepicker" ng-change="changeYear()" id="salaryYear" ng-model='newSalary.year' placeholder='Year' type="text" min=0 >
+
+                                    <select class="yearPicker form-control"  ng-model='newSalary.year' id="salaryYear">
+                                        <option style="display:none" value="">Select Year</option>
+                                    </select>
 
                                     </td>
                                     <td data-title="Salary">
@@ -413,15 +424,17 @@
                                     
                                 </tr>
                                 <tr>
-                                    <td data-title="Name" class="numeric" >
-                                         <div class="form-group" style="margin-top: 12px">
-                                    <select id="select_certification" class="form-control" ng-model="user.certification_selected" ng-options="certification.certification_name for certification in certification_list track by certification.certification_code">
-                                        <option style="display:none" value="">select a Certification</option>
-                                    </select>
-                                </div>
-                                    </td>
                                     <td data-title="Year" class="numeric" >
-                                         <input class="form-control" style="margin:1%" id="year" ng-model="user.year" placeholder='Year' type="text">
+                                          <select class="yearPicker form-control"  ng-model='user.year' id="year">
+                                             <option style="display:none" value="">Select Year</option>
+                                          </select>
+                                    </td>
+                                      <td data-title="Name" class="numeric" >
+                                        <div class="form-group" style="margin-top: 12px">
+                                            <select id="select_certification" class="form-control" ng-model="user.certification_selected" ng-options="certification.certification_name for certification in certification_list track by certification.certification_code">
+                                                <option style="display:none" value="">select a Certification</option>
+                                            </select>
+                                        </div>
                                     </td>
                                     <td data-title="" class="numeric" >
                                          <button class="form-control btn-success" type="button" id="mybtn" style="margin:1%;margin-bottom:5%" ng-click="addCertification(user)"> <span class="glyphicon glyphicon-plus"></span></button>

@@ -1,5 +1,9 @@
 var myApp = angular.module("employeeApp");
-myApp.controller('EmployeeAdd', ['$scope','$http','$location',function ($scope,$http,$location) {
+myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope',function ($scope,$http,$location,$rootScope) {
+
+	$rootScope.example9model = [];
+    $rootScope.example9settings = { enableSearch: true, scrollableHeight: '40vh', scrollable: true };
+	$rootScope.example9data = [];
 
 			$http.get("http://localhost:1337/employee/getSalary").success(function(result){
 	$scope.roleList=result;
