@@ -141,7 +141,11 @@
                          
                           $rootScope.team_id = $itemScope.node.id;
                           $state.go('dashboard.addEmployee');
-                      }],
+                      },
+
+
+
+                      ],
 
                        ['<span class="glyphicon glyphicon-trash"></span>  Delete Team', function ($itemScope) {
                            $rootScope.deleteTeam_id = $itemScope.node.id;

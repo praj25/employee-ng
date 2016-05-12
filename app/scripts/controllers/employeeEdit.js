@@ -27,17 +27,13 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
 				var duplicateFlag=false;
  				if(document.getElementById("select_certification").selectedIndex >0 && document.getElementById("year").value){
  						for(i=0;i<$scope.certifications.length;i++)
- 							if($scope.certifications[i].certification
-
-
- 								==user.certification_selected.certification_name)
+ 							if($scope.certifications[i].certification==user.certification_selected.certification_name)
  								duplicateFlag=true;
 
  						if(!duplicateFlag)
  						$scope.certifications.push({'certification': user.certification_selected.certification_name, 'year':user.year,'certification_code':user.certification_selected.certification_code,'add':true})		
 			}
 		}
-
 //---------------------------Add Salary-----------------------------------------//
 		$scope.addSalary = function(newSalary){
 				var duplicateFlag=false;
@@ -68,17 +64,48 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
                     			$scope.errorMsg = "Year is less then Joining Year";
 			                }
  						}	
+//-------------------------Add Salary-----------------------------/////////
+		 function validateDate(salaryYear, joiningYear) {
+        if (salaryYear >= joiningYear)
+            return true;
+        else
+            return false;
+    }
 
-			}
-			//---------------Sorting according to the year-------------------------//			
-			$scope.salary.sort(function (a, b) {
-				if (a.year < b.year)
-					return 1;
-				if (a.year > b.year)
-					return -1;
-				return 0;
-			});
-			}	
+    
+ $scope.updateSalaryYear = function (index) {
+        var date = $scope.emp.doj.toString();
+        var year = date.split(" ")[3]; //-----Get joining year-------
+
+        var isValid = validateDate($scope.salary[index].year, year)
+
+        if (isValid) {
+            var duplicateFlag = false;
+            for (i = 0; i < $scope.salary.length; i++) {
+                if ($scope.salary[index].year == $scope.salary[i].year && index != i) 
+                    duplicateFlag = true;
+                
+            }
+            if (!duplicateFlag) {
+                console.log("--not--")
+                $scope.salary[index].updated = true;
+            }
+            else
+            {
+                $scope.errorMsg = "Entry for the year " + $scope.salary[index].year + " already exists"
+                $("#invalidYear").modal();               
+            }               
+        }
+
+        else {
+            $scope.errorMsg = "Year is less then Joining Year"
+            $("#invalidYear").modal();
+        }
+    }
+
+    $scope.updateSalary = function (index) {
+                $scope.salary[index].updated = true;
+    }
 //----------------------------------------------------------------------------//
 		$scope.changeRole = function(index,role) {
 			console.log("index: "+index +" "+ "role: "+ role)
@@ -115,7 +142,6 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
 	                
 	            }
 	            if (!duplicateFlag) {
-	                console.log("--not--")
 	                $scope.salary[index].updated = true;
 	            }
 	            else
@@ -150,8 +176,6 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
 				this.data.sr_no = false
 			else
 			{
-				console.log("ddddddddddd")
-					console.log(this.data)
 				$scope.deleteId = this.data.sr_no;
 		        $scope.buttonClicked = btn;
 			}

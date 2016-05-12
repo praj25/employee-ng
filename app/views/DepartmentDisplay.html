@@ -2,10 +2,10 @@
         <div>
             <h2>Department Details</h2><br>
             <div ng-repeat="dpt in department" class="panel panel-default">
-                <div style="" class="panel-heading"><h4>{{dpt.deptName}}<small>&nbsp&nbsp&nbsp&nbsp&nbsp{{dpt.count}} employee</small></h4></div>
-                <div class="panel-body"><h5 class="normalfont normaltext" style="color:black;">{{dpt.description}}qqqqqqq</h5></div>
+                <div style="" class="panel-heading"><h4>{{department.team_name}}<small>&nbsp&nbsp&nbsp&nbsp&nbsp{{department.count}} employee</small></h4></div>
+                <div class="panel-body"><h5 class="normalfont normaltext" style="color:black;">{{department.team_description}}</h5></div>
             </div>
-
+{{department}}
             <div id="no-more-tables" style="max-height: 50vh; overflow: auto;" >
                          <table class="col-md-12 table-striped table-condensed cf" style="padding: 1%; ">
                             <thead class="cf">
@@ -15,7 +15,7 @@
                                     <th class="numeric">Email Id</th>
                                 </tr>
                             </thead>
-                            <tbody ng-repeat="dpt in department">{{department}}
+                            <tbody ng-repeat="dpt in department">
                                 <tr ng-repeat="emp in dpt.employee">
                                     <td data-title="First Name">
                                    {{emp.fname | capitalize}}

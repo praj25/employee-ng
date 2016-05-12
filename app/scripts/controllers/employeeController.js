@@ -35,11 +35,26 @@ else
     $scope.isFilled = true;
     $scope.successMsg = false;
 
+   function FormatDate(date) {
+       date = date.toString();
+       var year = (date.split('-')[0]);
+       var month = (date.split('-')[1]);
+       var day1 = (date.split('-')[2]);
+       var day = (day1.split(" ")[0]);
+     
+       var formattedDate =day + "-" + month+ "-"+year;
+         console.log(formattedDate);
+       return formattedDate;
+       
+   };
+
 //-------------------------------------To get user data--------------------------------------------//
             $http.get("http://localhost:1337/employee/employeedata/" + emp_id).success(function (result) {
             $scope.employee = result[0]
             $scope.employeeId = emp_id;
             $scope.emp = $scope.employee.personal[0];
+            $scope.emp.dob = new Date(FormatDate($scope.emp.dob));
+            $scope.emp.doj = new Date(FormatDate($scope.emp.doj));
             $scope.qualifications=$scope.employee.qualification;
             console.log($scope.qualifications);
             $scope.salary=$scope.employee.company;
