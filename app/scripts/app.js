@@ -19,6 +19,7 @@ angular
     'ngTouch',
     'TreeWidget',
      'ui.router',
+     'hljs',
     'ui.bootstrap.contextMenu',
     'CustomFilters'
   ])
@@ -29,7 +30,7 @@ angular
     $urlRouterProvider
 
         .otherwise('/')
-  //  .when("/dashboard",)
+
 
     $stateProvider
         // HOME STATE========================================

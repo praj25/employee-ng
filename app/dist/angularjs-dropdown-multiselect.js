@@ -1,6 +1,6 @@
 'use strict';
 
-var directiveModule = angular.module('employeeApp);
+var directiveModule = angular.module('employeeApp');
 
 directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$compile', '$parse',
     function ($filter, $document, $compile, $parse) {
