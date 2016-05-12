@@ -76,7 +76,7 @@ else
                 newPassword : $scope.newPass
             }
         
-            $http.put("http://localhost:58213/api/login/" + emp_id,data).success(function (result) {
+            $http.put("http://localhost:1337/login/" + emp_id,data).success(function (result) {
                 $scope.isValid = result;
                 if ($scope.isValid) {
                     $scope.successMsg = true;
@@ -99,6 +99,7 @@ else
         else
             return false;
     }
+
     function filled(oldPass, newPass, newPass1) {
 
         if (oldPass == undefined || oldPass == "" || newPass == undefined || newPass == "" || newPass1 == undefined || newPass1 == "")

@@ -64,44 +64,39 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
                     			$scope.errorMsg = "Year is less then Joining Year";
 			                }
  						}	
-//-------------------------Add Salary-----------------------------/////////
-		 function validateDate(salaryYear, joiningYear) {
-        if (salaryYear >= joiningYear)
-            return true;
-        else
-            return false;
-    }
+ 					}
+ 				}
 
     
- $scope.updateSalaryYear = function (index) {
-        var date = $scope.emp.doj.toString();
-        var year = date.split(" ")[3]; //-----Get joining year-------
+	$scope.updateSalaryYear = function (index) {
+	        var date = $scope.emp.doj.toString();
+	        var year = date.split(" ")[3]; //-----Get joining year-------
 
-        var isValid = validateDate($scope.salary[index].year, year)
+	        var isValid = validateDate($scope.salary[index].year, year)
 
-        if (isValid) {
-            var duplicateFlag = false;
-            for (i = 0; i < $scope.salary.length; i++) {
-                if ($scope.salary[index].year == $scope.salary[i].year && index != i) 
-                    duplicateFlag = true;
-                
-            }
-            if (!duplicateFlag) {
-                console.log("--not--")
-                $scope.salary[index].updated = true;
-            }
-            else
-            {
-                $scope.errorMsg = "Entry for the year " + $scope.salary[index].year + " already exists"
-                $("#invalidYear").modal();               
-            }               
-        }
+	        if (isValid) {
+	            var duplicateFlag = false;
+	            for (i = 0; i < $scope.salary.length; i++) {
+	                if ($scope.salary[index].year == $scope.salary[i].year && index != i) 
+	                    duplicateFlag = true;
+	                
+	            }
+	            if (!duplicateFlag) {
+	                console.log("--not--")
+	                $scope.salary[index].updated = true;
+	            }
+	            else
+	            {
+	                $scope.errorMsg = "Entry for the year " + $scope.salary[index].year + " already exists"
+	                $("#invalidYear").modal();               
+	            }               
+	        }
 
-        else {
-            $scope.errorMsg = "Year is less then Joining Year"
-            $("#invalidYear").modal();
-        }
-    }
+	        else {
+	            $scope.errorMsg = "Year is less then Joining Year"
+	            $("#invalidYear").modal();
+	        }
+	}
 
     $scope.updateSalary = function (index) {
                 $scope.salary[index].updated = true;

@@ -1,36 +1,38 @@
-    <link rel="stylesheet" href="../styles/table_responsive.css">
+
         <div>
             <h2>Department Details</h2><br>
             <div ng-repeat="dpt in department" class="panel panel-default">
-                <div style="" class="panel-heading"><h4>{{department.team_name}}<small>&nbsp&nbsp&nbsp&nbsp&nbsp{{department.count}} employee</small></h4></div>
-                <div class="panel-body"><h5 class="normalfont normaltext" style="color:black;">{{department.team_description}}</h5></div>
+                <div style="" class="panel-heading"><h4>{{dpt.deptName | capitalize }}<small>&nbsp&nbsp&nbsp&nbsp&nbsp{{dpt.count}} employee</small></h4></div>
+                <div class="panel-body"><h5 class="normalfont normaltext" style="color:black;">{{dpt.description}}</h5></div>
             </div>
-{{department}}
-            <div id="no-more-tables" style="max-height: 50vh; overflow: auto;" >
-                         <table class="col-md-12 table-striped table-condensed cf" style="padding: 1%; ">
-                            <thead class="cf">
-                                <tr>
-                                    <th class="numeric">First Name</th>
-                                    <th class="numeric">Last Name</th>
-                                    <th class="numeric">Email Id</th>
-                                </tr>
-                            </thead>
-                            <tbody ng-repeat="dpt in department">
-                                <tr ng-repeat="emp in dpt.employee">
-                                    <td data-title="First Name">
-                                   {{emp.fname | capitalize}}
-                                    </td>
-                                   
-                                    <td data-title="Last Name" class="numeric">
-                                        {{emp.lname | capitalize}}
-                                    </td>
-                                    <td data-title="Email" class="numeric">
-                                        {{emp.email_id}}
-                                    </td>
-                                </tr>
-                               
-                               
-                            </tbody>
-                        </table>
-                        </div>
+            <div ng-show="department[0].count== 0"><h4> No Employees found</h4></div>
+            <div ng-show="department[0].count != 0" id="no-more-tables" style="max-height: 50vh; overflow: auto;" class="panel-body">
+                <table class="col-md-12 table-striped table-condensed cf" style="padding: 1%; ">
+                    <thead class="cf">
+                        <tr>
+                            <th class="numeric" style="font-size:1.2em"><strong>First Name</strong></th>
+                            <th class="numeric" style="font-size:1.2em"><strong>Last Name</strong></th>
+                            <th class="numeric" style="font-size:1.2em"><strong>Email Id</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="dpt in department">
+                        <tr ng-repeat="emp in dpt.employee">
+                            <td data-title="First Name" style="font-size:1.2em">
+                                {{emp.fname | capitalize }}
+                            </td>
+
+                            <td data-title="Last Name" class="numeric" style="font-size:1.2em">
+                                {{emp.lname | capitalize}}
+                            </td>
+                            <td data-title="Email" class="numeric" style="font-size:1.2em">
+                                {{emp.email_id}}
+                            </td>
+
+
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
         </div>
