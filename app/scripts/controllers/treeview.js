@@ -3,9 +3,10 @@ myApp.controller('TreeCtrl', ['$scope','$http','$location','$rootScope','$window
 
 $scope.baseUrl='http://localhost:1337'
 
-  $scope.example9data = [{team_id:1,team:"WEB"}];
+  $scope.example9data = [{team_id:1,team_name:"WEB"},{team_id:2,team_name:"REMP"}];
   $rootScope.example9model = [];
   $scope.example9settings = { enableSearch: true, scrollableHeight: '40vh', scrollable: true };
+
     function init() {
 
 //----------------- Route Interception-------------------------//

@@ -90,4 +90,85 @@ myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope',funct
  						$scope.certifications.push({'certification_name': user.certification_selected.certification_name, 'year':user.year,'certification_code':user.certification_selected.certification_code,'add':true})		
 			}
 		}
+
+
+
+
+    $scope.AddEmployee = function (emp) {
+
+        //getTeamList();
+
+        var data = {
+            fname: emp.fname,
+            lname: emp.lname,
+            mobile_no: emp.mobile_no,
+            email_id: emp.email_id,
+            gender : emp.gender,
+            dob: emp.dob,
+            address: emp.address,
+            city: emp.city,
+            state: emp.state,
+            country: emp.country,
+            pincode: emp.pincode,
+            doj: emp.doj,
+            pf_no: emp.pf_no,
+            user_type: "u",
+          //  teamList: $scope.teamList
+        }
+
+        $http.post("http://localhost:1337/employee/addEmployee",data).success(function (result) {
+            $rootScope.$emit("loadTree", {});
+
+
+             console.log($scope.qualifications);
+             console.log($scope.certifications);
+             console.log($scope.salary);
+            var emp_id = result;
+            console.log(emp_id);
+            for (i = 0; i < $scope.qualifications.length; i++) {
+                $http.post("http://localhost:1337/employee/insertQualification", {
+                    emp_id: emp_id,
+                    qualification_code: $scope.qualifications[i].qualification_code,
+                    percentage: $scope.qualifications[i].percentage
+                }).success(function (result) {
+                    console.log(result)
+                });
+            }
+            for (i = 0; i < $scope.certifications.length; i++) {
+                $http.post("http://localhost:1337/employee/insertCertification",
+                {
+                    emp_id: emp_id,
+                    year: $scope.certifications[i].year,
+                    certification_code: $scope.certifications[i].certification_code
+                }).success(function (result) {
+                    console.log(result);
+                })
+            }
+            for (i = 0; i < $scope.salary.length; i++) {
+                $http.post("http://localhost:1337/employee/salary",
+                {
+                    emp_id: emp_id,
+                    year: $scope.salary[i].year,
+                    salary: $scope.salary[i].salary,
+                    bonus: $scope.salary[i].bonus,
+                    leaves: $scope.salary[i].leaves,
+                    code: $scope.salary[i].code
+                }).success(function (result) {
+                    alert(result)
+                    console.log(result);
+                })
+            }
+            
+          //  $state.go('dashboard.emp');
+            $scope.loadEmployeeData(emp_id);
+            $scope.$emit("load_tree");
+            })
+           .error(function () {
+                alert("here");
+            })     
+    }
+
+
+
+
 }]);

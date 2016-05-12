@@ -2,6 +2,7 @@ var myApp = angular.module("employeeApp");
 myApp.controller('editCtrl', ['$scope','$http','$location','$state',function ($scope,$http,$location,$state) {
 
 
+
 $scope.deletedCertifications = [];
 $scope.deletedQualifications = [];
 $scope.deletedSalary = [];
