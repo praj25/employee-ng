@@ -97,12 +97,41 @@
                             $state.go("dashboard.edit")
                         }],
 
+                        ['<span class="glyphicon glyphicon-plus"></span>  Add To Team', function ($itemScope) {
+                          
+                          
+                      
+                        },
+      /*                      [
+                                ['<select><option>1</option><option>1</option><select>', function ($itemScope) {
+                                  
+                                  
+                              
+                                }],
+
+                            ]*/
+
+                        ],
+
                         ['<span class="glyphicon glyphicon-trash"></span>  Delete', function ($itemScope) {
                             $("#myDeleteModal").modal();
                             $rootScope.DeleteEmpId = $itemScope.node.id;
                             $rootScope.DeleteTeamId = $itemScope.node.parentCode;
                       
-                        }]
+                        },
+                            [
+                                ['<span class="glyphicon glyphicon-trash"></span>  From Team', function ($itemScope) {
+                                  
+                                  
+                              
+                                }],
+                                ['<span class="glyphicon glyphicon-trash"></span>  From System', function ($itemScope) {
+                                  
+                                  
+                              
+                                }],
+                            ]
+                        ]
                     ];
 //------------------------------Menu at Team Level---------------------------------//
                     $scope.menuOptions_team = [

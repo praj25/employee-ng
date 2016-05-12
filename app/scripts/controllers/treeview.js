@@ -77,17 +77,17 @@ $scope.baseUrl='http://localhost:1337'
         {
             $state.go('dashboard.emp');
             $http.get("http://localhost:1337/employee/employeedata/" + $scope.selectedNode.id).success(function (result) {
-            $scope.employee = result[0]
-            $scope.employeeId = $scope.selectedNode.id;
-            $scope.emp = $scope.employee.personal[0];
-            $scope.emp.dob = new Date(FormatDate($scope.emp.dob));  
-            $scope.emp.doj = new Date(FormatDate($scope.emp.doj));  
-            $scope.qualifications=$scope.employee.qualification;
+            $rootScope.employee = result[0]
+            $rootScope.employeeId = $scope.selectedNode.id;
+            $rootScope.emp = $scope.employee.personal[0];
+            $rootScope.emp.dob = new Date(FormatDate($scope.emp.dob));  
+            $rootScope.emp.doj = new Date(FormatDate($scope.emp.doj));  
+            $rootScope.qualifications=$scope.employee.qualification;
        
-            $scope.salary=$scope.employee.company;
+            $rootScope.salary=$scope.employee.company;
         
 
-            $scope.certifications=$scope.employee.certification;
+            $rootScope.certifications=$scope.employee.certification;
             })
         }
         else if($scope.selectedNode.level=="dpt")
