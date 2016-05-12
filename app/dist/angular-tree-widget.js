@@ -114,21 +114,23 @@
                         ],
 
                         ['<span class="glyphicon glyphicon-trash"></span>  Delete', function ($itemScope) {
-                            $("#myDeleteModal").modal();
-                            $rootScope.DeleteEmpId = $itemScope.node.id;
-                            $rootScope.DeleteTeamId = $itemScope.node.parentCode;
+                            
+                      
                       
                         },
                             [
                                 ['<span class="glyphicon glyphicon-trash"></span>  From Team', function ($itemScope) {
                                   
-                                  
+                                  $rootScope.DeleteEmpId = $itemScope.node.id;
+                                  $rootScope.DeleteTeamId = $itemScope.node.parentCode;
                               
+                                  $("#DeleteFromTeamModal").modal();    
+                                  
                                 }],
                                 ['<span class="glyphicon glyphicon-trash"></span>  From System', function ($itemScope) {
+                                   $rootScope.DeleteEmpId = $itemScope.node.id;
                                   
-                                  
-                              
+                                $("#DeleteFromSystemModal").modal();
                                 }],
                             ]
                         ]
