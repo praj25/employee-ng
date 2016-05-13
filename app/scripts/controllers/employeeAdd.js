@@ -1,19 +1,23 @@
 var myApp = angular.module("employeeApp");
-myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope',function ($scope,$http,$location,$rootScope) {
+myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope','$state',function ($scope,$http,$location,$rootScope,$state) {
 
-	$rootScope.example9model = [];
-    $rootScope.example9settings = { enableSearch: true, scrollableHeight: '40vh', scrollable: true };
-	$rootScope.example9data = [];
+	//$rootScope.example9model = [];
+   // $rootScope.example9settings = { enableSearch: true, scrollableHeight: '40vh', scrollable: true };
+  //$rootScope.example9data = [];
 
-			$http.get("http://localhost:1337/employee/getSalary").success(function(result){
-	$scope.roleList=result;
-})
+    $scope.salary=[];
+    $scope.teamList = [];
+    $scope.qualifications=[];
+    $scope.certifications=[];
+    $scope.validEmail=true;
 
-			$scope.salary=[];
-			$scope.qualifications=[];
-			$scope.certifications=[];
 
-			  function validateDate(salaryYear, joiningYear) {
+	$http.get("http://localhost:1337/employee/getSalary").success(function(result){
+    	$scope.roleList=result;
+    })
+
+			
+	function validateDate(salaryYear, joiningYear) {
         if (salaryYear >= joiningYear)
             return true;
         else
@@ -39,8 +43,12 @@ myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope',funct
             var year = date.split(" ")[3]; //-----Get joining year-------
     
             var isValid = validateDate($scope.newSalary.year, year)
-            if(isValid){
-            if (!duplicateFlag) {
+
+            if(isValid)
+            {
+
+            if (!duplicateFlag)
+             {
                 $scope.salary.push({ 'year': newSalary.year, 'salary': newSalary.salary, 'leaves': newSalary.leaves, 'bonus': newSalary.bonus, 'role': newSalary.selected_role.role, 'code': newSalary.selected_role.code})
                 document.getElementById("newSalaryRole").selectedIndex;
                 document.getElementById("salaryYear").value = "";
@@ -92,11 +100,33 @@ myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope',funct
 		}
 
 
+    $scope.validateEmail = function(email)
+    {
+        $scope.validEmail = true;
+        $http.get("http://localhost:58213/api/employee").success(function (result) {
+            var emailList = result;
+            for (i = 0; i < emailList.length; i++)
+            {
+                if (emailList[i].email_id == email)
+                    $scope.validEmail = false;                  
+            }
+    })
+    }
+
+    function getTeamList()
+    {
+        $scope.teamList = [];
+        for(i=0;i<$rootScope.example9model.length;i++)
+        {
+            $scope.teamList.push($rootScope.example9model[i].id);
+        }
+    }
+       
 
 
     $scope.AddEmployee = function (emp) {
 
-        //getTeamList();
+        getTeamList();
 
         var data = {
             fname: emp.fname,
@@ -113,19 +143,17 @@ myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope',funct
             doj: emp.doj,
             pf_no: emp.pf_no,
             user_type: "u",
-          //  teamList: $scope.teamList
+            teamList: $scope.teamList
         }
 
         $http.post("http://localhost:1337/employee/addEmployee",data).success(function (result) {
+         
             $rootScope.$emit("loadTree", {});
+            var emp_id = result[0].emp_id;
+            alert(emp_id);
 
-
-             console.log($scope.qualifications);
-             console.log($scope.certifications);
-             console.log($scope.salary);
-            var emp_id = result;
-            console.log(emp_id);
             for (i = 0; i < $scope.qualifications.length; i++) {
+
                 $http.post("http://localhost:1337/employee/insertQualification", {
                     emp_id: emp_id,
                     qualification_code: $scope.qualifications[i].qualification_code,
@@ -134,6 +162,7 @@ myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope',funct
                     console.log(result)
                 });
             }
+
             for (i = 0; i < $scope.certifications.length; i++) {
                 $http.post("http://localhost:1337/employee/insertCertification",
                 {
@@ -144,6 +173,7 @@ myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope',funct
                     console.log(result);
                 })
             }
+
             for (i = 0; i < $scope.salary.length; i++) {
                 $http.post("http://localhost:1337/employee/salary",
                 {
@@ -159,7 +189,7 @@ myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope',funct
                 })
             }
             
-          //  $state.go('dashboard.emp');
+            $state.go('dashboard.emp');
             $scope.loadEmployeeData(emp_id);
             $scope.$emit("load_tree");
             })

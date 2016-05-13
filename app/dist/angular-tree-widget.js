@@ -89,7 +89,7 @@
                     ];
 //-----------------------------Menu at Employee Level-----------------------------------//
                     $scope.menuOptions_employee = [
-                        ['<span class="glyphicon glyphicon-pencil"></span>  Edit', function ($itemScope) {
+                        ['<span class="glyphicon glyphicon-edit"></span>  Edit', function ($itemScope) {
                           
                             $rootScope.selected = $itemScope.node.level;
                             console.log($rootScope.selected)
@@ -153,7 +153,7 @@
 
                        }],
 
-                        ['<span class="glyphicon glyphicon-pencil"></span>  Edit Team', function ($itemScope) {
+                        ['<span class="glyphicon glyphicon-edit"></span>  Edit Team', function ($itemScope) {
                     
                             $scope.$emit('selection-changed', $itemScope.node);
                             $rootScope.team_id = $itemScope.node.id;

@@ -74,6 +74,18 @@ $scope.baseUrl='http://localhost:1337'
         })
     })
 
+    $scope.loadEmployeeData = function (emp_id) {
+      $http.get("http://localhost:1337/employee/employeedata/" + emp_id).success(function (result) {
+      $rootScope.employee = result[0]
+      $rootScope.employeeId = $scope.selectedNode.id;
+      $rootScope.emp = $scope.employee.personal[0];
+      $rootScope.emp.dob = new Date(FormatDate($scope.emp.dob));  
+      $rootScope.emp.doj = new Date(FormatDate($scope.emp.doj));  
+      $rootScope.qualifications=$scope.employee.qualification;
+      $rootScope.salary=$scope.employee.company;
+      $rootScope.certifications=$scope.employee.certification;
+    })
+    }
 
     $scope.$on('selection-changed', function (e, node) {
                 //node - selected node in tree
@@ -109,15 +121,10 @@ $scope.baseUrl='http://localhost:1337'
         else if ($scope.selectedNode.level == "root") {
             $state.go("dashboard.root")
         }    
-     });
-
-
+    });
 
     $scope.$on('expanded-state-changed', function (e, node) {
-        // node - the node on which the expanded state changed
-        // to see the current state check the expanded property
         $scope.exapndedNode = node;
-        //console.log(node.expanded);
     });
 
     $scope.editEmployeeView = function() {
@@ -126,9 +133,9 @@ $scope.baseUrl='http://localhost:1337'
     }
 
     $scope.addEmployeeView = function () {
-       // $rootScope.example9model = [];
-        //$rootScope.team_id = "";
-         $state.go('dashboard.addEmployee');
+      $rootScope.example9model = [];
+      $rootScope.team_id = "";
+      $state.go('dashboard.addEmployee');
     }
 
  
