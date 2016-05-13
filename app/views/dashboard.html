@@ -116,7 +116,7 @@
         </div>
 
 <!--Employee Delete Modal-->
-    <div class="modal fade" id="myDeleteModal" role="dialog" ng-controller="deleteCtrl">
+    <div class="modal fade" id="DeleteFromTeamModal" role="dialog" ng-controller="deleteCtrl">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -124,20 +124,47 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Warning</h4>
+                
                 </div>
                 <div class="modal-body">
                     <p>Are You sure you want to Delete??</p>
                 </div>
                 <div class="modal-footer">
                     
-                        <button  type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteEmpFromSystem()">Delete from System</button>
-                        <button  type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteEmpFromTeam()">Delete from Team</button>
+                        <button  type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteEmpFromTeam()">Delete</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
 
         </div>
     </div>
+
+
+
+ <div class="modal fade" id="DeleteFromSystemModal" role="dialog" ng-controller="deleteCtrl">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Warning</h4>
+                    
+                </div>
+                <div class="modal-body">
+                    <p>Are You sure you want to Delete??</p>
+                </div>
+                <div class="modal-footer">
+                    
+                        <button  type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteEmpFromSystem()">Delete</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
 <!-- Delete Team modal-->
     <div class="modal fade" id="DeleteTeamModal" role="dialog" ng-controller="teamCtrl">
         <div class="modal-dialog">

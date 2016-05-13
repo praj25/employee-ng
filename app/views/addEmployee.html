@@ -137,6 +137,19 @@
                             </div>
                         </div>
 
+                        <div>
+                            <h5 class="normaltext">
+                                <div class="col-md-4" style="padding-top: 1.5%;font-size:1.2em">
+                                    <span><strong>Pincode</strong></span>
+                                </div>
+                            </h5>
+                            <div class="col-md-5 top-space" ng-class="{'has-error':EditEmployee.pincode.$invalid && !EditEmployee.pincode.$pristine, 'has-success':EditEmployee.pincode.$valid && !EditEmployee.pincode.$pristine}">
+                                <input class="form-control" name="pincode" ng-model='user.pincode' placeholder='pincode' type="text" required>
+                            </div>
+                            <div class="col-md-3 has-error" style="padding-top: 2%;font-size:1.2em">
+                                <i ng-show="EditEmployee.pincode.$invalid && !EditEmployee.pincode.$pristine" class="help-block">Please enter pincode</i>
+                            </div>
+                        </div>
 
                         <div>
                             <h5 class="normaltext">
@@ -151,6 +164,7 @@
                                 <i ng-show="EditEmployee.state.$invalid && !EditEmployee.state.$pristine" class="help-block">Please enter State</i>
                             </div>
                         </div>
+
                         <div>
                             <h5 class="normaltext">
                                 <div class="col-md-4" style="padding-top: 1.5%;font-size:1.2em">
