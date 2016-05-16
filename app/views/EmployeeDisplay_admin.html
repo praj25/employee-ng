@@ -15,7 +15,7 @@
 
 
 <div>
-    <h2> {{emp.fname }} {{emp.lname}} </h2>
+    <h2 class="normalfont normaltext" > {{emp.fname | capitalize }} {{emp.lname | capitalize }} </h2>
 </div>
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" data-target="#personal"><h5>Personal</h5></a></li>
@@ -47,7 +47,7 @@
                     <dt><h5 style="font-size:1.2em"><strong>City</strong></h5></dt>
                     <dd><h5 class="normalfont normaltext" style="font-size:1.2em">{{emp.city | capitalize}}</h5></dd>
                      <dt><h5 style="font-size:1.2em"><strong>Pincode</strong></h5></dt>
-                    <dd><h5 class="normalfont normaltext" style="font-size:1.2em">{{emp.pincode | capitalize}}</h5></dd>
+                    <dd><h5 class="normalfont normaltext" style="font-size:1.2em">{{emp.pincode}}</h5></dd>
 
                     <dt><h5 style="font-size:1.2em"><strong>State</strong></h5></dt>
                     <dd><h5 class="normalfont normaltext" style="font-size:1.2em">{{emp.state | capitalize }}</h5> </dd>
@@ -80,7 +80,7 @@
                 <div class="col-md-4">
                     <dl class="dl-horizontal panel-body">
                         <dt><h5 style="font-size:1.2em"><strong>Teams</strong></h5></dt>
-                        <dd ng-repeat="team in emp.teams"><h5 class="normalfont">{{team.team_name}}</h5></dd>
+                        <dd ng-repeat="team in teams"><h5 class="normalfont">{{team.team_name}}</h5></dd>
                     </dl>
                 </div>
 

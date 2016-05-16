@@ -64,13 +64,12 @@
                                     <span><strong>Email</strong></span>
                                 </div>
                             </h5>
-                            <div class="col-md-5 top-space" ng-class="{'has-error':EditEmployee.email_id.$invalid && !EditEmployee. email_id.$pristine, 'has-success':EditEmployee.email_id.$valid && !EditEmployee.email_id.$pristine}">
-                                <input class="form-control" name="email_id" ng-model='user.email_id' placeholder="Email" type="email"  required>
+                            <div class="col-md-5 top-space" ng-class="{'has-error':EditEmployee.email_id.$invalid && !EditEmployee. email_id.$pristine || !validEmail , 'has-success':EditEmployee.email_id.$valid && !EditEmployee.email_id.$pristine}">
+                                <input class="form-control" name="email_id" ng-model='user.email_id' placeholder="Email" type="email" ng-change="validateEmail(user.email_id)" required>
                             </div>
                             <div class="col-md-3 has-error" style="padding-top: 2%;font-size:1.2em">
                                 <i ng-show="EditEmployee.email_id.$invalid && !EditEmployee.email_id.$pristine" class="help-block">Please Enter a valid Email-Id</i>
-                           
-
+                                <i ng-show="!validEmail" class="help-block">Email-Id is already taken</i>
                             </div>
                         </div>
                         <div>
@@ -226,7 +225,7 @@
                             <div>
                                 <h5 class="normaltext">
                                     <div class="col-md-4" style="padding-top: 1.5%;font-size:1.2em">
-                                        <span><strong>DOJ</strong></span>
+                                        <span><strong>Date Of Joining</strong></span>
                                     </div>
                                 </h5>
                                 <div class="col-md-5" ng-class="{'has-error':EditEmployee.doj.$invalid && EditEmployee.doj.$touched, 'has-success':EditEmployee.doj.$valid && EditEmployee.doj.$touched}">
@@ -468,7 +467,7 @@
         </div>
         <div class="col-sm-3 col-sm-offset-4 panel-body">
 
-            <button class="btn btn-lg btn-success btn-block" style="font-size:0.8em" ng-disabled="EditEmployee.$invalid" ng-click="AddEmployee(user)">Add</button>
+            <button class="btn btn-lg btn-success btn-block" style="font-size:0.8em" ng-disabled="EditEmployee.$invalid || !validEmail " ng-click="AddEmployee(user)">Add</button>
 
         </div>
     </form>

@@ -1,10 +1,6 @@
 var myApp = angular.module("employeeApp");
 myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope','$state',function ($scope,$http,$location,$rootScope,$state) {
 
-	//$rootScope.example9model = [];
-   // $rootScope.example9settings = { enableSearch: true, scrollableHeight: '40vh', scrollable: true };
-  //$rootScope.example9data = [];
-
     $scope.salary=[];
     $scope.teamList = [];
     $scope.qualifications=[];
@@ -28,7 +24,6 @@ myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope','$sta
 
         var duplicateFlag = false;
         if (document.getElementById("newSalaryRole").selectedIndex > 0 && document.getElementById("salaryYear").value && document.getElementById("salarySalary").value && document.getElementById("salaryLeaves").value && document.getElementById("salaryBonus").value && document.getElementById("newSalaryRole").value) {
-          
 
             for (i = 0; i < $scope.salary.length; i++)
                 if ($scope.salary[i].year == newSalary.year)
@@ -46,17 +41,16 @@ myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope','$sta
 
             if(isValid)
             {
-
-            if (!duplicateFlag)
-             {
-                $scope.salary.push({ 'year': newSalary.year, 'salary': newSalary.salary, 'leaves': newSalary.leaves, 'bonus': newSalary.bonus, 'role': newSalary.selected_role.role, 'code': newSalary.selected_role.code})
-                document.getElementById("newSalaryRole").selectedIndex;
-                document.getElementById("salaryYear").value = "";
-                document.getElementById("salarySalary").value = "";
-                document.getElementById("salaryLeaves").value = "";
-                document.getElementById("salaryBonus").value = "";
-                document.getElementById("newSalaryRole").value = ""
-            }
+                if (!duplicateFlag)
+                 {
+                    $scope.salary.push({ 'year': newSalary.year, 'salary': newSalary.salary, 'leaves': newSalary.leaves, 'bonus': newSalary.bonus, 'role': newSalary.selected_role.role, 'code': newSalary.selected_role.code})
+                    document.getElementById("newSalaryRole").selectedIndex;
+                    document.getElementById("salaryYear").value = "";
+                    document.getElementById("salarySalary").value = "";
+                    document.getElementById("salaryLeaves").value = "";
+                    document.getElementById("salaryBonus").value = "";
+                    document.getElementById("newSalaryRole").value = ""
+                }
             }
             else {
                 $scope.ErrorMessage = "Salary Year is less than Date of Joining.";
@@ -74,12 +68,12 @@ myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope','$sta
     }
 
 
-			$scope.addQualification = function(user){
- 			var duplicateFlag=false
- 				if(document.getElementById("select_qualificaion").selectedIndex >0 && document.getElementById("percentage").value){                 
- 					for(i=0;i<$scope.qualifications.length;i++)
- 						if($scope.qualifications[i].name==user.qualification_selected.name)
- 							duplicateFlag=true;
+	$scope.addQualification = function(user){
+ 		var duplicateFlag=false
+ 			if(document.getElementById("select_qualificaion").selectedIndex >0 && document.getElementById("percentage").value){                 
+ 				for(i=0;i<$scope.qualifications.length;i++)
+ 					if($scope.qualifications[i].name==user.qualification_selected.name)
+ 						duplicateFlag=true;
 
  					if(!duplicateFlag)
  					$scope.qualifications.push({'name': user.qualification_selected.name, 'percentage':user.percentage,'qualification_code': user.qualification_selected.code,'add':true});
@@ -99,11 +93,33 @@ myApp.controller('EmployeeAdd', ['$scope','$http','$location','$rootScope','$sta
 			}
 		}
 
+//------------------------------Delete Certification-----------------------------//
+    $scope.delete = function (btn) {
+        $scope.buttonClicked = btn;
+        $scope.deleteId = this.$index;
+    }
+//----------------------------- Delete Functiions------------------------------------//
+    $scope.deleteQualification = function() {
+        if($scope.deleteId!=undefined){
+            $scope.qualifications.splice($scope.deleteId, 1);
+        }
+    }
+    $scope.deleteCertification = function () {
+        if ($scope.deleteId != undefined) {
+            $scope.certifications.splice($scope.deleteId, 1);
+        }
+    }
+    $scope.deleteSalary = function () {
+        if ($scope.deleteId != undefined) {
+            $scope.salary.splice(this.$index, 1);
+        }
+    }
+
 
     $scope.validateEmail = function(email)
     {
         $scope.validEmail = true;
-        $http.get("http://localhost:58213/api/employee").success(function (result) {
+        $http.get("http://localhost:1337/employee/getemaillist").success(function (result) {
             var emailList = result;
             for (i = 0; i < emailList.length; i++)
             {

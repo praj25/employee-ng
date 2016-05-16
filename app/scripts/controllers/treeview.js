@@ -3,7 +3,7 @@ myApp.controller('TreeCtrl', ['$scope','$http','$location','$rootScope','$window
 
 $scope.baseUrl='http://localhost:1337'
 
-  $scope.example9data = [{team_id:1,team_name:"WEB"},{team_id:2,team_name:"REMP"}];
+//  $scope.example9data = [{team_id:1,team_name:"WEB"},{team_id:2,team_name:"REMP"}];
   $rootScope.example9model = [];
   $scope.example9settings = { enableSearch: true, scrollableHeight: '40vh', scrollable: true };
 
@@ -45,6 +45,11 @@ $scope.baseUrl='http://localhost:1337'
                     $scope.gender_list=result;
               
                 })
+         //---------------------To get list of teams----------------------------------------------//
+             $http.get('http://localhost:1337/employee/team').success(function (result) {     
+                   $rootScope.example9data =result;
+                })
+                
     }
     init();
 
@@ -66,6 +71,7 @@ $scope.baseUrl='http://localhost:1337'
     $scope.$on("load_tree", function () {
         $http.get("http://localhost:1337/employee/treedata").success(function(result)
         {
+          
             $rootScope.treeNodes = result;
             console.log(result);
         })
@@ -95,6 +101,7 @@ $scope.baseUrl='http://localhost:1337'
             $state.go('dashboard.emp');
             $http.get("http://localhost:1337/employee/employeedata/" + $scope.selectedNode.id).success(function (result) {
             $rootScope.employee = result[0]
+            console.log( $rootScope.employee)
             $rootScope.employeeId = $scope.selectedNode.id;
             $rootScope.emp = $scope.employee.personal[0];
             $rootScope.emp.dob = new Date(FormatDate($scope.emp.dob));  
@@ -102,8 +109,7 @@ $scope.baseUrl='http://localhost:1337'
             $rootScope.qualifications=$scope.employee.qualification;
        
             $rootScope.salary=$scope.employee.company;
-        
-
+            $rootScope.teams = $scope.employee.team;
             $rootScope.certifications=$scope.employee.certification;
             })
         }

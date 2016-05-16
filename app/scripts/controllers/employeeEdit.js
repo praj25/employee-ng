@@ -1,5 +1,5 @@
 var myApp = angular.module("employeeApp");
-myApp.controller('editCtrl', ['$scope','$http','$location','$state',function ($scope,$http,$location,$state) {
+myApp.controller('editCtrl', ['$scope','$rootScope','$http','$location','$state',function ($scope,$rootScope,$http,$location,$state) {
 
 
 
@@ -7,9 +7,23 @@ $scope.deletedCertifications = [];
 $scope.deletedQualifications = [];
 $scope.deletedSalary = [];
 $scope.newSalary = [];
+$scope.teamList = [];
 $http.get("http://localhost:1337/employee/getSalary").success(function(result){
 	$scope.roleList=result;
 })
+
+
+
+//------------------- Add Employees Teams----------------//
+    for (i = 0; i < $scope.teams.length; i++)
+    {
+        $rootScope.example9model.push({
+            'id': $scope.teams[i].team_id
+
+
+        })
+    }
+
 //-----------------------------To add qualification-------------------------------//
  		$scope.addQualification = function(user){
  			var duplicateFlag=false
@@ -23,6 +37,7 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
  					$scope.qualifications.push({'degree': user.qualification_selected.name, 'percentage':user.percentage,'qualification_code': user.qualification_selected.code,'add':true});
  				}
 		}
+
 //------------------------- Add Certification------------------------------------//				
 		$scope.addCertification = function(user){
 				var duplicateFlag=false;
@@ -35,6 +50,7 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
  						$scope.certifications.push({'certification': user.certification_selected.certification_name, 'year':user.year,'certification_code':user.certification_selected.certification_code,'add':true})		
 			}
 		}
+
 //---------------------------Add Salary-----------------------------------------//
 		$scope.addSalary = function(newSalary){
 				var duplicateFlag=false;
@@ -221,9 +237,42 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
 					}
 				}
 			}
+
+
+		    function getTeamList()
+		    {
+		        $scope.teamList = [];
+		        for(i=0;i<$rootScope.example9model.length;i++)
+		        {
+		            $scope.teamList.push($rootScope.example9model[i].id);
+		        }
+		    }
+       
 //---------------To update the changes------------------------------//
-			$scope.saveData = function(emp)
-			{
+		$scope.saveData = function(emp)
+		{
+			getTeamList();
+		        var data = {
+		            fname: emp.fname,
+		            lname: emp.lname,
+		            mobile_no: emp.mobile_no,
+		            email_id: emp.email_id,
+		            dob: emp.dob,
+		            address: emp.address,
+		            city: emp.city,
+		            state: emp.state,
+		            country: emp.country,
+		            pincode: emp.pincode,
+		            doj: emp.doj,
+		            pf_no: emp.pf_no,
+		            teamList: $scope.teamList
+		        }
+		        $http.put("http://localhost:1337/employee/updatePersonalinfo/" + emp.emp_id, data).success(function (result) {
+
+		            $scope.loadEmployeeData(emp.emp_id);
+		            $scope.$emit("load_tree", {});
+		            $state.go("dashboard.emp");
+		        })
 
 				for(i=0;i<$scope.deletedCertifications.length;i++)
 				{
@@ -240,6 +289,7 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
 						console.log(result);
 					})
 				}	
+
 				for(i=0;i<$scope.deletedSalary.length;i++)
 				{
 					$http.delete("http://localhost:1337/employee/deleteSalary?id="+$scope.deletedSalary[i]).success(function(result){
@@ -293,7 +343,8 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
 		                })
 		            }
 		        }	
-		      for (i = 0; i < $scope.salary.length; i++)
+
+		        for (i = 0; i < $scope.salary.length; i++)
 		        {
 		            if($scope.salary[i].updated)
 		            { 
@@ -308,29 +359,6 @@ $http.get("http://localhost:1337/employee/getSalary").success(function(result){
 		                });
 		            }
 		        }		        			
-
-		        var data = {
-		            fname: emp.fname,
-		            lname: emp.lname,
-		            mobile_no: emp.mobile_no,
-		            email_id: emp.email_id,
-		            dob: emp.dob,
-		            address: emp.address,
-		            city: emp.city,
-		            state: emp.state,
-		            country: emp.country,
-		            pincode: emp.pincode,
-		            doj: emp.doj,
-		            pf_no: emp.pf_no,
-		          //  teamList: $scope.teamList
-		        }
-		        $http.put("http://localhost:1337/employee/updatePersonalinfo/" + emp.emp_id, data).success(function (result) {
-
-		            //$scope.loadEmployeeData(emp.emp_id);
-		            $state.go("dashboard.emp");
-		            $scope.$emit("load_tree", {});
-		            
-		        })
 
 				$state.go("dashboard.emp");
 

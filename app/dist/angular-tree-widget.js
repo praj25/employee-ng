@@ -92,8 +92,9 @@
                         ['<span class="glyphicon glyphicon-edit"></span>  Edit', function ($itemScope) {
                           
                             $rootScope.selected = $itemScope.node.level;
-                            console.log($rootScope.selected)
                             $scope.$emit('selection-changed', $itemScope.node);
+                            $rootScope.example9model = [];
+                            $rootScope.team_id = "";
                             $state.go("dashboard.edit")
                         }],
 

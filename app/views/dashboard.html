@@ -5,12 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../styles/table_responsive.css">
-    
 </head>
 <body style="font-size: 12px;" ng-app="myApp">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse" style="border-radius: 0px;text-transform: none;">
         <div class="container" ng-controller="LoginCtrl">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -27,8 +26,8 @@
                     <li><a data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
                 </ul>
             </div>
-
-            <div id="myModal" class="modal fade "  role="dialog">
+            <!--Modal for Logout-->
+            <div id="myModal" class="modal fade" role="dialog">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -51,26 +50,23 @@
 
                 </div>
             </div>
-
-
-
         </div>
     </nav>
     <!-- End -->
-        <div class="container-fluid bg-3" ng-controller="TreeCtrl" style="margin-top:-10px">
-            <div class="row ">
-
-                <div class="col-sm-3">
-                    <div class="panel panel-default">
+    <div class="container-fluid bg-3" ng-controller="TreeCtrl" style="margin-top:-20px;padding-bottom: 10%;">
+        <div class="row">           
+<!--id="sidebar-resizer" resizer="vertical" resizer-width="1" resizer-left="#sidebar" resizer-right="#content" resizer-max="500"-->
+                <div class="col-sm-3" style="height:100%;padding:0%;min-width:20%" >
+                    <div class="panel panel-default"><!--Changes made-->
                         <div class="panel-heading">
                             Navigation
                             <button type="button" data-toggle="tooltip" title="Add New Employee" data-placement="auto right" class="btn-xs btn-success" ng-click="addEmployeeView()" style="float: right;border-radius: 15px;"><span class="glyphicon glyphicon-plus"></span></button>
                         </div>
 
-                        <div class="container page panel-body" style="width: 100%">
+                        <div class="container page panel-body" style="width:100%;">
                             <div class="row presentation">
                                 <div>
-                                    <div class="tree-container" style="overflow: auto;max-height:80vh">
+                                    <div class="tree-container" style="overflow: auto;height:80vh;">
                                         <tree nodes='treeNodes' options='options1'></tree>
                                     </div>
                                 </div>
@@ -80,8 +76,8 @@
                     </div>
                 </div>
 
-                <div class="col-sm-9" style="height:80vh">
-                    <div ui-view="">
+                <div class="col-sm-9" style="height:100%;padding-right: 0%;" >
+                    <div ui-view="" style="max-height:80vh;height:80vh" >
                   <!-- ---------------------------Default Template------------- -->
                         <div>
                             <h2>Organization Details</h2><br>
@@ -111,9 +107,22 @@
                     </div>  
                   
                 </div>
+                </div>
+            
+    </div>
 
-            </div>
+
+
+
+<!--Footer-->
+     <div class="navbar navbar-default navbar-fixed-bottom", style="border:1px solid #ddd;margin-top: 5%">
+        <div class="container">
+              <p class="navbar-text pull-left">© 2016 - MCA 
+              </p>
         </div>
+    </div>
+
+   
 
 <!--Employee Delete Modal-->
     <div class="modal fade" id="DeleteFromTeamModal" role="dialog" ng-controller="deleteCtrl">
@@ -141,7 +150,7 @@
 
 
 
- <div class="modal fade" id="DeleteFromSystemModal" role="dialog" ng-controller="deleteCtrl">
+    <div class="modal fade" id="DeleteFromSystemModal" role="dialog" ng-controller="deleteCtrl">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -187,5 +196,8 @@
 
         </div>
     </div>
+
+
+
     </body>
 </html>
